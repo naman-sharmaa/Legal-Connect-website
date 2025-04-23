@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Diagnostic Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            overflow: auto;
+            max-height: 400px;
+        }
+        .info-box {
+            background: #e8f4fd;
+            border-left: 4px solid #2196F3;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+        }
+        .error-box {
+            background: #fdeeee;
+            border-left: 4px solid #f44336;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background: #0d8aee;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Provider Diagnostic Tool</h1>
+        
+        <div class="info-box">
+            <p>This tool helps diagnose issues with provider data and appointments. Use the buttons below to check different aspects of the system.</p>
+        </div>
+        
+        <div class="actions">
+            <button id="check-session">Check Current Session</button>
+            <button id="check-providers">Check All Providers</button>
+            <button id="check-appointments">Check Appointments</button>
+            <button id="analyze-appointments">Analyze Provider IDs</button>
+            <button id="diagnose-current">Diagnose Current Provider</button>
+            <button id="clear-storage">Clear Storage</button>
+        </div>
+        
+        <div id="results" class="results">
+            <p>Press a button above to see diagnostic information.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Handle button clicks
+        document.getElementById('check-session').addEventListener('click', checkSession);
+        document.getElementById('check-providers').addEventListener('click', checkProviders);
+        document.getElementById('check-appointments').addEventListener('click', checkAppointments);
+        document.getElementById('analyze-appointments').addEventListener('click', analyzeAppointments);
+        document.getElementById('diagnose-current').addEventListener('click', diagnoseCurrentProvider);
+        document.getElementById('clear-storage').addEventListener('click', clearStorage);
+        
+        // Get current session info
+        function checkSession() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<h2>Session Information</h2>';
+            
+            // Get session ID from localStorage or sessionStorage
+            let sessionId = localStorage.getItem('session_id');
+            if (!sessionId) {
+                sessionId = sessionStorage.getItem('session_id');
+            }
+            
+            if (!sessionId) {
+                resultsDiv.innerHTML += '<div class="error-box">No session ID found. You need to log in first.</div>';
+                return;
+            }
+            
+            resultsDiv.innerHTML += '<div class="info-box">Checking session ID: ' + sessionId.substring(0, 10) + '...</div>';
+            
+            // Check authentication with backend
+            fetch('../backend/api/check-auth.php', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + sessionId,
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.authenticated) {
+                    resultsDiv.innerHTML += '<div class="info-box">You are authenticated as: ' + data.user.name + '</div>';
+                    resultsDiv.innerHTML += '<h3>User Details:</h3>';
+                    resultsDiv.innerHTML += '<pre>' + JSON.stringify(data.user, null, 2) + '</pre>';
+                    
+                    // Save user ID for later
+                    localStorage.setItem('debug_user_id', data.user.id);
+                } else {
+                    resultsDiv.innerHTML += '<div class="error-box">Authentication failed: ' + (data.message || 'Unknown error') + '</div>';
+                }
+            })
+            .catch(error => {
+                resultsDiv.innerHTML += '<div class="error-box">Error checking authentication: ' + error.message + '</div>';
+            });
+        }
+        
+        // Check all providers in the system
+        function checkProviders() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<h2>All Providers</h2>';
+            resultsDiv.innerHTML += '<div class="info-box">Fetching provider information...</div>';
+            
+            fetch('../backend/provider-debug.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.providers && data.providers.providers) {
+                    const providers = data.providers.providers;
+                    resultsDiv.innerHTML += '<div class="info-box">Found ' + providers.length + ' providers in the database.</div>';
+                    
+                    let tableHtml = '<table><tr><th>ID</th><th>Name</th><th>Email</th><th>License</th><th>Actions</th></tr>';
+                    
+                    providers.forEach(provider => {
+                        tableHtml += '<tr>';
+                        tableHtml += '<td>' + provider.id + '</td>';
+                        tableHtml += '<td>' + provider.name + '</td>';
+                        tableHtml += '<td>' + provider.email + '</td>';
+                        tableHtml += '<td>' + (provider.license_number || 'None') + '</td>';
+                        tableHtml += '<td><button onclick="checkProviderAppointments(\'' + provider.id + '\')">View Appointments</button></td>';
+                        tableHtml += '</tr>';
+                    });
+                    
+                    tableHtml += '</table>';
+                    resultsDiv.innerHTML += tableHtml;
+                } else {
+                    resultsDiv.innerHTML += '<div class="error-box">No providers found or error fetching data.</div>';
+                }
+                
+                // Display any database info
+                if (data.database_info) {
+                    resultsDiv.innerHTML += '<h3>Database Information:</h3>';
+                    resultsDiv.innerHTML += '<pre>' + JSON.stringify(data.database_info, null, 2) + '</pre>';
+                }
+            })
+            .catch(error => {
+                resultsDiv.innerHTML += '<div class="error-box">Error fetching providers: ' + error.message + '</div>';
+            });
+        }
+        
+        // Check provider appointments
+        function checkProviderAppointments(providerId) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<h2>Appointments for Provider ID: ' + providerId + '</h2>';
+            resultsDiv.innerHTML += '<div class="info-box">Fetching appointments...</div>';
+            
+            fetch('../backend/provider-debug.php?providerId=' + providerId)
+            .then(response => response.json())
+            .then(data => {
+                if (data.provider_appointments) {
+                    const appointmentData = data.provider_appointments;
+                    
+                    if (appointmentData.appointments && appointmentData.appointments.length > 0) {
+                        resultsDiv.innerHTML += '<div class="info-box">Found ' + appointmentData.appointments.length + ' appointments.</div>';
+                        resultsDiv.innerHTML += '<pre>' + JSON.stringify(appointmentData.appointments, null, 2) + '</pre>';
+                    } else {
+                        resultsDiv.innerHTML += '<div class="info-box">No appointments found for this provider.</div>';
+                    }
+                } else {
+                    resultsDiv.innerHTML += '<div class="error-box">Error fetching appointment data.</div>';
+                }
+            })
+            .catch(error => {
+                resultsDiv.innerHTML += '<div class="error-box">Error fetching appointments: ' + error.message + '</div>';
+            });
+        }
+        
+        // Check all appointments
+        function checkAppointments() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<h2>Appointments Table Information</h2>';
+            resultsDiv.innerHTML += '<div class="info-box">Checking appointments table...</div>';
+            
+            fetch('../backend/provider-debug.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.appointments_table) {
+                    const tableInfo = data.appointments_table;
+                    
+                    if (tableInfo.table_exists) {
+                        resultsDiv.innerHTML += '<div class="info-box">Appointments table exists with ' + tableInfo.appointment_count + ' records.</div>';
+                        resultsDiv.innerHTML += '<h3>Columns:</h3>';
+                        resultsDiv.innerHTML += '<pre>' + JSON.stringify(tableInfo.columns, null, 2) + '</pre>';
+                    } else {
+                        resultsDiv.innerHTML += '<div class="error-box">Appointments table doesn\'t exist or error: ' + tableInfo.error + '</div>';
+                    }
+                } else {
+                    resultsDiv.innerHTML += '<div class="error-box">Error checking appointments table.</div>';
+                }
+            })
+            .catch(error => {
+                resultsDiv.innerHTML += '<div class="error-box">Error: ' + error.message + '</div>';
+            });
+        }
+        
+        // Analyze appointment provider IDs
+        function analyzeAppointments() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<h2>Provider ID Analysis in Appointments Table</h2>';
+            resultsDiv.innerHTML += '<div class="info-box">Analyzing provider IDs in appointments table...</div>';
+            
+            fetch('../backend/check-appointments.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.summary) {
+                    resultsDiv.innerHTML += '<h3>Summary:</h3>';
+                    resultsDiv.innerHTML += '<pre>' + JSON.stringify(data.summary, null, 2) + '</pre>';
+                    
+                    // Display appointments by ID type
+                    resultsDiv.innerHTML += '<h3>Provider ID Types:</h3>';
+                    
+                    if (data.provider_details && data.provider_details.length > 0) {
+                        let tableHtml = '<table><tr><th>Provider ID</th><th>ID Type</th><th>Provider Name</th><th>Appointment Count</th></tr>';
+                        
+                        data.provider_details.forEach(provider => {
+                            const count = data.appointment_counts[provider.provider_id] || 0;
+                            tableHtml += '<tr>';
+                            tableHtml += '<td>' + provider.provider_id + '</td>';
+                            tableHtml += '<td>' + provider.id_type + '</td>';
+                            tableHtml += '<td>' + provider.name + '</td>';
+                            tableHtml += '<td>' + count + '</td>';
+                            tableHtml += '</tr>';
+                        });
+                        
+                        tableHtml += '</table>';
+                        resultsDiv.innerHTML += tableHtml;
+                        
+                        // Display important message about the problem
+                        if (data.summary.providers_by_license > 0 && data.summary.providers_by_user_id === 0) {
+                            resultsDiv.innerHTML += '<div class="error-box"><strong>IDENTIFIED ISSUE:</strong> All your provider IDs in the appointments table are license numbers, not user IDs. This is why your appointments aren\'t showing up when using user IDs to fetch them.</div>';
+                        }
+                    } else {
+                        resultsDiv.innerHTML += '<div class="info-box">No provider details available.</div>';
+                    }
+                } else {
+                    resultsDiv.innerHTML += '<div class="error-box">Error analyzing appointments.</div>';
+                }
+            })
+            .catch(error => {
+                resultsDiv.innerHTML += '<div class="error-box">Error: ' + error.message + '</div>';
+            });
+        }
+        
+        // Diagnose current provider
+        function diagnoseCurrentProvider() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<h2>Current Provider Diagnosis</h2>';
+            
+            // Get stored user info
+            let userData = localStorage.getItem('userData');
+            try {
+                if (userData) {
+                    userData = JSON.parse(userData);
+                    resultsDiv.innerHTML += '<div class="info-box">User data found in localStorage</div>';
+                    resultsDiv.innerHTML += '<h3>Stored User Data:</h3>';
+                    resultsDiv.innerHTML += '<pre>' + JSON.stringify(userData, null, 2) + '</pre>';
+                    
+                    // Check if data contains anything about John Lawyer
+                    if (JSON.stringify(userData).includes('John Lawyer')) {
+                        resultsDiv.innerHTML += '<div class="error-box">FOUND JOHN LAWYER TEST DATA in localStorage!</div>';
+                    }
+                } else {
+                    resultsDiv.innerHTML += '<div class="info-box">No user data in localStorage</div>';
+                }
+            } catch (e) {
+                resultsDiv.innerHTML += '<div class="error-box">Error parsing userData: ' + e.message + '</div>';
+            }
+            
+            // Get session info
+            let sessionId = localStorage.getItem('session_id');
+            if (!sessionId) {
+                sessionId = sessionStorage.getItem('session_id');
+            }
+            
+            if (!sessionId) {
+                resultsDiv.innerHTML += '<div class="error-box">No session ID found. You need to log in first.</div>';
+                return;
+            }
+            
+            // Check authentication with backend
+            fetch('../backend/api/check-auth.php', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + sessionId,
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.authenticated && data.user) {
+                    const userId = data.user.id;
+                    resultsDiv.innerHTML += '<div class="info-box">Authenticated as ' + data.user.name + '</div>';
+                    
+                    // Test appointment fetch with user ID
+                    resultsDiv.innerHTML += '<h3>Testing appointment fetch with user ID: ' + userId + '</h3>';
+                    
+                    fetch(`../backend/fetch-provider-appointments.php?providerId=${userId}`)
+                    .then(response => response.json())
+                    .then(appointmentData => {
+                        resultsDiv.innerHTML += '<pre>' + JSON.stringify(appointmentData, null, 2) + '</pre>';
+                        
+                        if (appointmentData.success) {
+                            if (appointmentData.appointments && appointmentData.appointments.length > 0) {
+                                resultsDiv.innerHTML += '<div class="info-box">SUCCESS: Found ' + appointmentData.appointments.length + ' appointments!</div>';
+                            } else {
+                                resultsDiv.innerHTML += '<div class="info-box">No appointments found, but API call was successful.</div>';
+                            }
+                        } else {
+                            resultsDiv.innerHTML += '<div class="error-box">Error from API: ' + appointmentData.message + '</div>';
+                        }
+                    })
+                    .catch(error => {
+                        resultsDiv.innerHTML += '<div class="error-box">Error fetching appointments: ' + error.message + '</div>';
+                    });
+                    
+                    // If there's a license number, test with that too
+                    if (data.user.license_number) {
+                        const licenseNumber = data.user.license_number;
+                        resultsDiv.innerHTML += '<h3>Testing appointment fetch with license number: ' + licenseNumber + '</h3>';
+                        
+                        fetch(`../backend/fetch-provider-appointments.php?providerId=${licenseNumber}`)
+                        .then(response => response.json())
+                        .then(appointmentData => {
+                            resultsDiv.innerHTML += '<pre>' + JSON.stringify(appointmentData, null, 2) + '</pre>';
+                            
+                            if (appointmentData.success) {
+                                if (appointmentData.appointments && appointmentData.appointments.length > 0) {
+                                    resultsDiv.innerHTML += '<div class="info-box">SUCCESS: Found ' + appointmentData.appointments.length + ' appointments!</div>';
+                                } else {
+                                    resultsDiv.innerHTML += '<div class="info-box">No appointments found, but API call was successful.</div>';
+                                }
+                            } else {
+                                resultsDiv.innerHTML += '<div class="error-box">Error from API: ' + appointmentData.message + '</div>';
+                            }
+                        })
+                        .catch(error => {
+                            resultsDiv.innerHTML += '<div class="error-box">Error fetching appointments: ' + error.message + '</div>';
+                        });
+                    }
+                } else {
+                    resultsDiv.innerHTML += '<div class="error-box">Not authenticated: ' + (data.message || 'Unknown error') + '</div>';
+                }
+            })
+            .catch(error => {
+                resultsDiv.innerHTML += '<div class="error-box">Error checking authentication: ' + error.message + '</div>';
+            });
+        }
+        
+        // Clear all storage
+        function clearStorage() {
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Remove all cookies
+            document.cookie.split(";").forEach(function(c) {
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            });
+            
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="info-box">All storage (localStorage, sessionStorage, cookies) has been cleared.</div>';
+        }
+        
+        // Helper function to check provider appointments (for the table buttons)
+        window.checkProviderAppointments = checkProviderAppointments;
+    </script>
+</body>
+</html> 

@@ -1,0 +1,6 @@
+[18-Apr-2025 07:46:01 UTC] Raw input received: {"email":"abhithrckstr90@gmail.com","password":"@bh@Yrwt90","user_type":"user"}
+[18-Apr-2025 07:46:01 UTC] Processed input - Email: abhithrckstr90@gmail.com, UserType: user
+[18-Apr-2025 07:46:01 UTC] Connected to database: legalconnect
+[18-Apr-2025 07:46:01 UTC] Login error: Unknown column 'name' in 'field list'
+[18-Apr-2025 07:46:01 UTC] Stack trace: #0 C:\xampp\htdocs\Major project\backend\api\direct-login.php(111): mysqli->prepare('SELECT id, emai...')
+#1 {main}

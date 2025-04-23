@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Provider IDs</title>
+    <link rel="stylesheet" href="../src/output.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 30px;
+        }
+        h1 {
+            color: #1e40af;
+            margin-bottom: 20px;
+        }
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .alert-info {
+            background-color: #e0f2fe;
+            border-left: 4px solid #0ea5e9;
+            color: #0c4a6e;
+        }
+        .alert-warning {
+            background-color: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            color: #78350f;
+        }
+        .alert-danger {
+            background-color: #fee2e2;
+            border-left: 4px solid #ef4444;
+            color: #7f1d1d;
+        }
+        .alert-success {
+            background-color: #dcfce7;
+            border-left: 4px solid #10b981;
+            color: #064e3b;
+        }
+        .btn {
+            display: inline-block;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            border: none;
+            font-size: 16px;
+        }
+        .btn-primary {
+            background-color: #1e40af;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #1e3a8a;
+        }
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+        .btn-success {
+            background-color: #10b981;
+            color: white;
+        }
+        .btn-danger {
+            background-color: #ef4444;
+            color: white;
+        }
+        pre {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 5px;
+            overflow: auto;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        .step {
+            margin-bottom: 30px;
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .step-number {
+            background-color: #1e40af;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #1e40af;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container">
+        <h1>Update Provider IDs in Appointments Table</h1>
+        
+        <div class="alert alert-warning">
+            <strong>Warning:</strong> This tool will update all provider IDs in the appointments table from license numbers to user IDs. 
+            A backup of the current table will be created before making changes.
+        </div>
+        
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title">Current Providers</div>
+            </div>
+            <p>First, let's check the current providers in the system:</p>
+            <button id="check-providers" class="btn btn-secondary">Check Providers</button>
+            <div id="providers-result" class="mt-4 hidden"></div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <div class="step-title">Current Appointments</div>
+            </div>
+            <p>Next, let's check the current provider IDs in the appointments table:</p>
+            <button id="check-appointments" class="btn btn-secondary">Check Appointments</button>
+            <div id="appointments-result" class="mt-4 hidden"></div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <div class="step-title">Update Provider IDs</div>
+            </div>
+            <p>Now we can update the provider IDs from license numbers to user IDs:</p>
+            <button id="update-ids" class="btn btn-primary">Update Provider IDs</button>
+            <div id="update-result" class="mt-4 hidden"></div>
+            <div id="loading" class="hidden mt-4">
+                <span class="spinner"></span> Processing...
+            </div>
+        </div>
+        
+        <div class="mt-6">
+            <a href="debug-provider.html" class="btn btn-secondary">Back to Diagnostics</a>
+            <a href="provider-dashboard.html" class="btn btn-success">Go to Provider Dashboard</a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check providers button
+            document.getElementById('check-providers').addEventListener('click', function() {
+                const resultDiv = document.getElementById('providers-result');
+                resultDiv.innerHTML = '<div class="spinner"></div> Loading providers...';
+                resultDiv.classList.remove('hidden');
+                
+                fetch('../backend/provider-debug.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.providers && data.providers.providers) {
+                            const providers = data.providers.providers;
+                            
+                            let html = `<div class="alert alert-info">Found ${providers.length} providers in the database.</div>`;
+                            
+                            // Create table of providers
+                            html += '<table>';
+                            html += '<tr><th>User ID</th><th>Name</th><th>License Number</th></tr>';
+                            
+                            providers.forEach(provider => {
+                                html += '<tr>';
+                                html += `<td>${provider.id || 'N/A'}</td>`;
+                                html += `<td>${provider.name || 'N/A'}</td>`;
+                                html += `<td>${provider.license_number || 'N/A'}</td>`;
+                                html += '</tr>';
+                            });
+                            
+                            html += '</table>';
+                            resultDiv.innerHTML = html;
+                        } else {
+                            resultDiv.innerHTML = '<div class="alert alert-danger">No providers found or error fetching data.</div>';
+                        }
+                    })
+                    .catch(error => {
+                        resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+                    });
+            });
+            
+            // Check appointments button
+            document.getElementById('check-appointments').addEventListener('click', function() {
+                const resultDiv = document.getElementById('appointments-result');
+                resultDiv.innerHTML = '<div class="spinner"></div> Loading appointments...';
+                resultDiv.classList.remove('hidden');
+                
+                fetch('../backend/check-appointments.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        let html = '';
+                        
+                        if (data.summary) {
+                            html += '<div class="alert alert-info">';
+                            html += `<p><strong>Total providers in appointments:</strong> ${data.summary.providers_in_appointments}</p>`;
+                            html += `<p><strong>Providers matched:</strong> ${data.summary.providers_matched}</p>`;
+                            html += `<p><strong>Providers using user_id:</strong> ${data.summary.providers_by_user_id}</p>`;
+                            html += `<p><strong>Providers using license_number:</strong> ${data.summary.providers_by_license}</p>`;
+                            html += `<p><strong>Unknown provider IDs:</strong> ${data.summary.providers_unknown}</p>`;
+                            html += '</div>';
+                            
+                            if (data.provider_details && data.provider_details.length > 0) {
+                                html += '<h3 class="mt-4 mb-2">Provider IDs in Appointments</h3>';
+                                html += '<table>';
+                                html += '<tr><th>Provider ID</th><th>ID Type</th><th>Provider Name</th><th>Appointments</th></tr>';
+                                
+                                data.provider_details.forEach(provider => {
+                                    const count = data.appointment_counts[provider.provider_id] || 0;
+                                    html += '<tr>';
+                                    html += `<td>${provider.provider_id}</td>`;
+                                    html += `<td>${provider.id_type}</td>`;
+                                    html += `<td>${provider.name}</td>`;
+                                    html += `<td>${count}</td>`;
+                                    html += '</tr>';
+                                });
+                                
+                                html += '</table>';
+                                
+                                if (data.summary.providers_by_license > 0) {
+                                    html += '<div class="alert alert-warning">';
+                                    html += '<strong>Action Required:</strong> ';
+                                    html += 'Some appointments are using license numbers as provider IDs. ';
+                                    html += 'Click the "Update Provider IDs" button to convert them to user IDs.';
+                                    html += '</div>';
+                                } else if (data.summary.providers_by_user_id > 0 && data.summary.providers_by_license === 0) {
+                                    html += '<div class="alert alert-success">';
+                                    html += '<strong>Success:</strong> ';
+                                    html += 'All appointments are already using user IDs as provider IDs. No action needed.';
+                                    html += '</div>';
+                                }
+                            }
+                        } else {
+                            html += '<div class="alert alert-danger">Error analyzing appointments.</div>';
+                        }
+                        
+                        resultDiv.innerHTML = html;
+                    })
+                    .catch(error => {
+                        resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+                    });
+            });
+            
+            // Update IDs button
+            document.getElementById('update-ids').addEventListener('click', function() {
+                const resultDiv = document.getElementById('update-result');
+                const loadingDiv = document.getElementById('loading');
+                
+                // Show loading indicator
+                loadingDiv.classList.remove('hidden');
+                resultDiv.classList.add('hidden');
+                
+                // Confirm action
+                if (!confirm('Are you sure you want to update all provider IDs from license numbers to user IDs? A backup will be created first.')) {
+                    loadingDiv.classList.add('hidden');
+                    return;
+                }
+                
+                fetch('../backend/update-provider-ids.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Hide loading indicator
+                        loadingDiv.classList.add('hidden');
+                        resultDiv.classList.remove('hidden');
+                        
+                        let html = '';
+                        
+                        if (data.success) {
+                            html += `<div class="alert alert-success">${data.message}</div>`;
+                            
+                            if (data.backup_result && data.backup_result.success) {
+                                html += `<div class="alert alert-info">Backup created: ${data.backup_result.message}</div>`;
+                            }
+                            
+                            if (data.providers && data.providers.length > 0) {
+                                html += '<h3 class="mt-4 mb-2">Provider Mapping</h3>';
+                                html += '<table>';
+                                html += '<tr><th>License Number</th><th>User ID</th><th>Provider Name</th></tr>';
+                                
+                                data.providers.forEach(provider => {
+                                    html += '<tr>';
+                                    html += `<td>${provider.license_number}</td>`;
+                                    html += `<td>${provider.user_id}</td>`;
+                                    html += `<td>${provider.name}</td>`;
+                                    html += '</tr>';
+                                });
+                                
+                                html += '</table>';
+                            }
+                            
+                            html += '<div class="alert alert-success mt-4">';
+                            html += 'The update is complete! Now all appointments use user IDs as provider IDs.';
+                            html += '<br><br>';
+                            html += 'Please click "Go to Provider Dashboard" to test the changes.';
+                            html += '</div>';
+                        } else {
+                            html += `<div class="alert alert-danger">${data.message}</div>`;
+                            
+                            if (data.errors && data.errors.length > 0) {
+                                html += '<h3 class="mt-4 mb-2">Errors</h3>';
+                                html += '<pre>' + JSON.stringify(data.errors, null, 2) + '</pre>';
+                            }
+                        }
+                        
+                        resultDiv.innerHTML = html;
+                    })
+                    .catch(error => {
+                        // Hide loading indicator
+                        loadingDiv.classList.add('hidden');
+                        resultDiv.classList.remove('hidden');
+                        
+                        resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+                    });
+            });
+        });
+    </script>
+</body>
+</html> 

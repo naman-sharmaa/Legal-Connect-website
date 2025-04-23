@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Forum - LegalConnect</title>
+    <link rel="stylesheet" href="/src/output.css">
+
+    <!-- AOS Library for Scroll Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header
+        class="bg-blue-900 bg-opacity-90 text-white shadow-md backdrop-blur-md fixed w-full z-50 transition duration-500">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <!-- Logo -->
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+                    <span class="text-blue-600 text-lg font-bold">LC</span>
+                </div>
+                <p class="text-2xl font-bold tracking-wide">
+                    <span class="text-white">Legal</span><span class="text-green-400">Connect</span>
+                </p>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden md:flex space-x-8 text-lg font-medium">
+                <a href="home.html" class="hover:text-green-400 transition">Home</a>
+                <a href="#" class="hover:text-green-400 transition">Services</a>
+                <a href="about.html" class="hover:text-green-400 transition">About</a>
+                <a href="contactsupport.html" class="hover:text-green-400 transition">Contact</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white focus:outline-none" id="menu-toggle">&#9776;</button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="hidden md:hidden bg-blue-900 text-white p-4 mt-16" id="mobile-menu">
+        <a href="home.html" class="block py-2">Home</a>
+        <a href="#" class="block py-2">Services</a>
+        <a href="about.html" class="block py-2">About</a>
+        <a href="contactsupport.html" class="block py-2">Contact</a>
+    </div>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-blue-900 to-green-600 text-white py-16" data-aos="fade-up">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">LegalConnect Community Forum</h1>
+                <p class="text-xl text-gray-200 max-w-3xl mx-auto">Connect, discuss, and share knowledge with legal
+                    professionals and fellow citizens</p>
+            </div>
+        </section>
+
+        <!-- Forum Navigation -->
+
+
+        <!-- Main Forum Content -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <!-- Sidebar with Categories -->
+
+
+                    <!-- Main Forum Threads -->
+                    <div class="lg:col-span-32" data-aos="fade-left">
+                        <!-- Featured Thread -->
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 border-l-4 border-green-500">
+                            <div class="p-6">
+                                <div class="flex items-start">
+                                    <img src="/images/vector-flat-illustration-grayscale-avatar-user-profile-person-icon-gender-neutral-silhouette-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-875.avif"
+                                        alt="User" class="w-12 h-12 rounded-full mr-4">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h3 class="text-xl font-bold text-blue-900">How to handle property
+                                                    dispute between siblings?</h3>
+                                                <p class="text-gray-600 mt-1">Posted by <a href="#"
+                                                        class="text-green-600 hover:underline">Priya Sharma</a> in <a
+                                                        href="#" class="text-blue-600 hover:underline">Property Law</a>
+                                                </p>
+                                            </div>
+                                            <span
+                                                class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">Featured</span>
+                                        </div>
+                                        <p class="mt-3 text-gray-700">My brother and I inherited our father's house. He
+                                            wants to sell but I want to keep it. What are my legal options to prevent
+                                            the sale? We're both equal owners...</p>
+                                        <div class="mt-4 flex items-center text-sm text-gray-500">
+                                            <span class="mr-4"><i class="far fa-comment mr-1"></i> 14 replies</span>
+                                            <span class="mr-4"><i class="far fa-eye mr-1"></i> 238 views</span>
+                                            <span><i class="far fa-clock mr-1"></i> 2 days ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Thread Filters -->
+
+
+                        <!-- Thread List -->
+                        <div class="space-y-6" id="threads-container">
+                            <!-- Thread 1 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                                <div class="p-6">
+                                    <div class="flex items-start">
+                                        <img src="/images/vector-flat-illustration-grayscale-avatar-user-profile-person-icon-gender-neutral-silhouette-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-875.avif"
+                                            alt="User" class="w-12 h-12 rounded-full mr-4">
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <h3 class="text-lg font-bold text-blue-900">Can employer terminate
+                                                        without notice during probation?</h3>
+                                                    <p class="text-gray-600 mt-1">Posted by <a href="#"
+                                                            class="text-green-600 hover:underline">Rahul Mehta</a> in <a
+                                                            href="#" class="text-blue-600 hover:underline">Employment
+                                                            Law</a></p>
+                                                </div>
+                                                <span
+                                                    class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full">New</span>
+                                            </div>
+                                            <p class="mt-3 text-gray-700">I was terminated from my job during the
+                                                6-month probation period without any notice. The company cited
+                                                "performance issues" but provided no documentation...</p>
+                                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                                <span class="mr-4"><i class="far fa-comment mr-1"></i> 7 replies</span>
+                                                <span class="mr-4"><i class="far fa-eye mr-1"></i> 156 views</span>
+                                                <span><i class="far fa-clock mr-1"></i> 5 hours ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thread 2 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                                <div class="p-6">
+                                    <div class="flex items-start">
+                                        <div
+                                            class="w-12 h-12 bg-green-100 rounded-full mr-4 flex items-center justify-center text-green-600 font-bold">
+                                            AS</div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <h3 class="text-lg font-bold text-blue-900">Document requirements
+                                                        for registering a rental agreement</h3>
+                                                    <p class="text-gray-600 mt-1">Posted by <a href="#"
+                                                            class="text-green-600 hover:underline">Amit Singh</a> in <a
+                                                            href="#" class="text-blue-600 hover:underline">Property
+                                                            Law</a></p>
+                                                </div>
+                                                <span
+                                                    class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-full">Popular</span>
+                                            </div>
+                                            <p class="mt-3 text-gray-700">I'm renting out my apartment for the first
+                                                time. What documents are required to register the rental agreement? Is
+                                                it mandatory to register if the lease is for 11 months?</p>
+                                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                                <span class="mr-4"><i class="far fa-comment mr-1"></i> 12 replies</span>
+                                                <span class="mr-4"><i class="far fa-eye mr-1"></i> 189 views</span>
+                                                <span><i class="far fa-clock mr-1"></i> 1 day ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thread 3 (with verified lawyer response) -->
+                            <div
+                                class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition border-l-4 border-blue-500">
+                                <div class="p-6">
+                                    <div class="flex items-start">
+                                        <img src="/images/vector-flat-illustration-grayscale-avatar-user-profile-person-icon-gender-neutral-silhouette-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-875.avif"
+                                            alt="User" class="w-12 h-12 rounded-full mr-4">
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-start">
+                                                <div>
+                                                    <h3 class="text-lg font-bold text-blue-900">Recovery of money lent
+                                                        to a friend without documentation</h3>
+                                                    <p class="text-gray-600 mt-1">Posted by <a href="#"
+                                                            class="text-green-600 hover:underline">Neha Patel</a> in <a
+                                                            href="#" class="text-blue-600 hover:underline">General
+                                                            Legal</a></p>
+                                                </div>
+                                                <span
+                                                    class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">Lawyer
+                                                    Responded</span>
+                                            </div>
+                                            <p class="mt-3 text-gray-700">I lent ₹50,000 to a close friend last year
+                                                with only verbal agreement for repayment. Now they're refusing to pay
+                                                back. Do I have any legal recourse without written proof?</p>
+                                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                                <span class="mr-4"><i class="far fa-comment mr-1"></i> 9 replies</span>
+                                                <span class="mr-4"><i class="far fa-eye mr-1"></i> 143 views</span>
+                                                <span><i class="far fa-clock mr-1"></i> 2 days ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thread 4 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                                <div class="p-6">
+                                    <div class="flex items-start">
+                                        <div
+                                            class="w-12 h-12 bg-purple-100 rounded-full mr-4 flex items-center justify-center text-purple-600 font-bold">
+                                            VK</div>
+                                        <div class="flex-1">
+                                            <h3 class="text-lg font-bold text-blue-900">Legal implications of sharing
+                                                work on freelance platforms</h3>
+                                            <p class="text-gray-600 mt-1">Posted by <a href="#"
+                                                    class="text-green-600 hover:underline">Vikram K.</a> in <a href="#"
+                                                    class="text-blue-600 hover:underline">Business Law</a></p>
+                                            <p class="mt-3 text-gray-700">As a freelance designer, I often share my work
+                                                on platforms like Upwork and Fiverr. What legal protections should I
+                                                have in place to prevent clients from using my work without payment?</p>
+                                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                                <span class="mr-4"><i class="far fa-comment mr-1"></i> 5 replies</span>
+                                                <span class="mr-4"><i class="far fa-eye mr-1"></i> 97 views</span>
+                                                <span><i class="far fa-clock mr-1"></i> 3 days ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thread 5 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                                <div class="p-6">
+                                    <div class="flex items-start">
+                                        <img src="/images/vector-flat-illustration-grayscale-avatar-user-profile-person-icon-gender-neutral-silhouette-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-875.avif"
+                                            alt="User" class="w-12 h-12 rounded-full mr-4">
+                                        <div class="flex-1">
+                                            <h3 class="text-lg font-bold text-blue-900">Procedure for filing cyber
+                                                harassment complaint</h3>
+                                            <p class="text-gray-600 mt-1">Posted by <a href="#"
+                                                    class="text-green-600 hover:underline">Rajeev Nair</a> in <a
+                                                    href="#" class="text-blue-600 hover:underline">Cyber Law</a></p>
+                                            <p class="mt-3 text-gray-700">Someone has been sending threatening messages
+                                                and sharing manipulated images of me on social media. What's the process
+                                                to file a cyber harassment complaint with the police?</p>
+                                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                                <span class="mr-4"><i class="far fa-comment mr-1"></i> 11 replies</span>
+                                                <span class="mr-4"><i class="far fa-eye mr-1"></i> 201 views</span>
+                                                <span><i class="far fa-clock mr-1"></i> 4 days ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thread 6 (with verified lawyer badge) -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                                <div class="p-6">
+                                    <div class="flex items-start">
+                                        <img src="/images/vector-flat-illustration-grayscale-avatar-user-profile-person-icon-gender-neutral-silhouette-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-875.avif"
+                                            alt="User" class="w-12 h-12 rounded-full mr-4 border-2 border-green-500">
+                                        <div class="flex-1">
+                                            <div class="flex items-center">
+                                                <h3 class="text-lg font-bold text-blue-900">Maintenance rights for
+                                                    divorced women</h3>
+                                                <span
+                                                    class="ml-2 bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded-full flex items-center">
+                                                    <i class="fas fa-check-circle text-blue-500 "></i> Verified Lawyer
+                                                </span>
+                                            </div>
+                                            <p class="text-gray-600 mt-1">Posted by <a href="#"
+                                                    class="text-green-600 hover:underline">Adv. Shalini Deshpande</a> in
+                                                <a href="#" class="text-blue-600 hover:underline">Family Law</a></p>
+                                            <p class="mt-3 text-gray-700">I'm creating a resource for divorced women
+                                                about their maintenance rights under Indian law. What factors do courts
+                                                consider when determining maintenance amounts? How can women ensure they
+                                                receive fair support?</p>
+                                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                                <span class="mr-4"><i class="far fa-comment mr-1"></i> 18 replies</span>
+                                                <span class="mr-4"><i class="far fa-eye mr-1"></i> 312 views</span>
+                                                <span><i class="far fa-clock mr-1"></i> 1 week ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thread 7 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                                <div class="p-6">
+                                    <div class="flex items-start">
+                                        <img src="/images/vector-flat-illustration-grayscale-avatar-user-profile-person-icon-gender-neutral-silhouette-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-875.avif"
+                                            alt="User" class="w-12 h-12 rounded-full mr-4">
+                                        <div class="flex-1">
+                                            <h3 class="text-lg font-bold text-blue-900">Legal requirements for starting
+                                                a small business</h3>
+                                            <p class="text-gray-600 mt-1">Posted by <a href="#"
+                                                    class="text-green-600 hover:underline">Arjun Gupta</a> in <a
+                                                    href="#" class="text-blue-600 hover:underline">Business Law</a></p>
+                                            <p class="mt-3 text-gray-700">I'm planning to start a small home-based food
+                                                business. What licenses and registrations are required? Do I need FSSAI
+                                                registration if I'm only selling locally?</p>
+                                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                                <span class="mr-4"><i class="far fa-comment mr-1"></i> 6 replies</span>
+                                                <span class="mr-4"><i class="far fa-eye mr-1"></i> 124 views</span>
+                                                <span><i class="far fa-clock mr-1"></i> 1 week ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thread 8 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                                <div class="p-6">
+                                    <div class="flex items-start">
+                                        <div
+                                            class="w-12 h-12 bg-red-100 rounded-full mr-4 flex items-center justify-center text-red-600 font-bold">
+                                            SM</div>
+                                        <div class="flex-1">
+                                            <h3 class="text-lg font-bold text-blue-900">Tenant rights regarding
+                                                maintenance and repairs</h3>
+                                            <p class="text-gray-600 mt-1">Posted by <a href="#"
+                                                    class="text-green-600 hover:underline">Sunita M.</a> in <a href="#"
+                                                    class="text-blue-600 hover:underline">Property Law</a></p>
+                                            <p class="mt-3 text-gray-700">My landlord is refusing to fix a leaking roof
+                                                and broken plumbing, saying these are "minor issues." What are my rights
+                                                as a tenant? Can I withhold rent until repairs are made?</p>
+                                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                                <span class="mr-4"><i class="far fa-comment mr-1"></i> 10 replies</span>
+                                                <span class="mr-4"><i class="far fa-eye mr-1"></i> 178 views</span>
+                                                <span><i class="far fa-clock mr-1"></i> 2 weeks ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-16 bg-gradient-to-r from-blue-900 to-green-600 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-6">Have a legal question?</h2>
+                <p class="text-xl text-gray-200 max-w-2xl mx-auto mb-8">Join our community to get answers from legal
+                    experts and fellow members</p>
+                <button id="open-discussion-modal"
+                    class="inline-block bg-white text-blue-600 px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-lg cursor-pointer">
+                    Join the Discussion
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Discussion Modal -->
+    <div id="discussion-modal"
+        class="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl p-6 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-blue-900">Post Your Question</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <form id="new-question-form" class="space-y-4">
+                <div>
+                    <label for="question-title" class="block text-gray-700 font-medium mb-2">Question Title</label>
+                    <input type="text" id="question-title"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="What's your legal question?" required>
+                </div>
+
+                <div>
+                    <label for="question-category" class="block text-gray-700 font-medium mb-2">Category</label>
+                    <select id="question-category"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        required>
+                        <option value="">Select a category</option>
+                        <option value="Property Law">Property Law</option>
+                        <option value="Employment Law">Employment Law</option>
+                        <option value="Family Law">Family Law</option>
+                        <option value="Business Law">Business Law</option>
+                        <option value="Cyber Law">Cyber Law</option>
+                        <option value="General Legal">General Legal</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="question-details" class="block text-gray-700 font-medium mb-2">Details</label>
+                    <textarea id="question-details" rows="6"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Provide details about your legal question..." required></textarea>
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="cancel-question"
+                        class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">Cancel</button>
+                    <button type="submit"
+                        class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">Post
+                        Question</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-10 py-10" data-aos="fade-up">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+                <div>
+                    <h2 class="text-xl font-semibold">LegalConnect</h2>
+                    <p class="text-gray-400 mt-2">Connecting citizens with trusted legal professionals.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Quick Links</h3>
+                    <ul class="mt-2 space-y-2">
+                        <li><a href="home.html" class="hover:text-gray-400 transition">Home</a></li>
+                        <li><a href="#" class="hover:text-gray-400 transition">Services</a></li>
+                        <li><a href="about.html" class="hover:text-gray-400 transition">About</a></li>
+                        <li><a href="contactsupport.html" class="hover:text-gray-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Legal</h3>
+                    <ul class="mt-2 space-y-2">
+                        <li><a href="privacy.html" class="hover:text-gray-400 transition">Privacy Policy</a></li>
+                        <li><a href="privacy.html" class="hover:text-gray-400 transition">Terms of Service</a></li>
+                        <li><a href="FAQ.html" class="hover:text-gray-400 transition">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Follow Us</h3>
+                    <div class="flex justify-center md:justify-start space-x-4 mt-2">
+                        <a href="https://www.facebook.com/" class="hover:text-green-400 transition">Facebook</a>
+                        <a href="https://x.com/?lang=en" class="hover:text-green-400 transition">Twitter</a>
+                        <a href="https://www.linkedin.com/login" class="hover:text-green-400 transition">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-gray-500 mt-6 border-t border-gray-700 pt-4">&copy; 2025 LegalConnect. All
+                rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- AOS & JavaScript -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Mobile menu toggle
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+
+        // Discussion Modal functionality
+        const modal = document.getElementById('discussion-modal');
+        const openModalBtn = document.getElementById('open-discussion-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const cancelBtn = document.getElementById('cancel-question');
+        const questionForm = document.getElementById('new-question-form');
+        const threadsContainer = document.getElementById('threads-container');
+
+        // Open modal
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+
+        // Close modal
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Handle form submission
+        questionForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Get form values
+            const title = document.getElementById('question-title').value;
+            const category = document.getElementById('question-category').value;
+            const details = document.getElementById('question-details').value;
+
+            // Create new thread element
+            const newThread = document.createElement('div');
+            newThread.className = 'bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition';
+            newThread.innerHTML = `
+                <div class="p-6">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full mr-4 flex items-center justify-center text-blue-600 font-bold">Y</div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-lg font-bold text-blue-900">${title}</h3>
+                                    <p class="text-gray-600 mt-1">Posted by <a href="#" class="text-green-600 hover:underline">You</a> in <a href="#" class="text-blue-600 hover:underline">${category}</a></p>
+                                </div>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full">New</span>
+                            </div>
+                            <p class="mt-3 text-gray-700">${details}</p>
+                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                <span class="mr-4"><i class="far fa-comment mr-1"></i> 0 replies</span>
+                                <span class="mr-4"><i class="far fa-eye mr-1"></i> 0 views</span>
+                                <span><i class="far fa-clock mr-1"></i> Just now</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Add new thread to the top of the container
+            threadsContainer.insertBefore(newThread, threadsContainer.firstChild);
+
+            // Reset form and close modal
+            questionForm.reset();
+            closeModal();
+
+            // Scroll to the new thread
+            newThread.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+[
+    {
+        "id": "provider-123",
+        "name": "Dr. Jane Smith",
+        "provider_type": "Corporate Lawyer",
+        "bio": "Experienced corporate lawyer with over 10 years of expertise in business law and contract negotiations.",
+        "services_offered": "Contract Review, Business Formation, Intellectual Property",
+        "email": "jane.smith@example.com",
+        "phone": "555-123-4567"
+    },
+    {
+        "id": "provider-456",
+        "name": "Mark Johnson",
+        "provider_type": "Criminal Defense Lawyer",
+        "bio": "Dedicated criminal defense lawyer with extensive courtroom experience.",
+        "services_offered": "Criminal Defense, DUI Defense, Appeals",
+        "email": "mark.johnson@example.com",
+        "phone": "555-987-6543"
+    },
+    {
+        "id": "provider-789",
+        "name": "Sarah Williams",
+        "provider_type": "Family Law Specialist",
+        "bio": "Compassionate family law attorney helping clients navigate difficult family situations.",
+        "services_offered": "Divorce, Child Custody, Adoption",
+        "email": "sarah.williams@example.com",
+        "phone": "555-567-8901"
+    },
+    {
+        "id": "provider-101",
+        "name": "David Chen",
+        "provider_type": "Immigration Lawyer",
+        "bio": "Specialized immigration attorney with expertise in visas, green cards, and citizenship applications.",
+        "services_offered": "Visa Applications, Green Cards, Citizenship",
+        "email": "david.chen@example.com",
+        "phone": "555-234-5678"
+    },
+    {
+        "id": "provider-202",
+        "name": "Elena Rodriguez",
+        "provider_type": "Personal Injury Lawyer",
+        "bio": "Dedicated personal injury attorney with a track record of successful compensation cases.",
+        "services_offered": "Car Accidents, Medical Malpractice, Slip and Fall",
+        "email": "elena.rodriguez@example.com",
+        "phone": "555-345-6789"
+    }
+]

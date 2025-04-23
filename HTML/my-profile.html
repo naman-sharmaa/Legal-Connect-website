@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - LegalConnect</title>
+    <link rel="stylesheet" href="../src/output.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+	<style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 250px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 100;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+        .dropdown-menu a, .dropdown-menu button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 16px;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+        .dropdown-menu a:hover, .dropdown-menu button:hover {
+            background-color: #f4f4f4;
+        }
+
+        .services-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 250px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 50;
+            padding: 16px 0;
+        }
+        .nav-services:hover .services-dropdown {
+            display: block;
+        }
+        .services-dropdown a {
+            display: block;
+            padding: 10px 16px;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .services-dropdown a:hover {
+            background-color: #f4f4f4;
+            color: #2563eb;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #edit-profile-btn {
+            /* Make absolutely sure this button is visible */
+            display: block !important; 
+            opacity: 1 !important;
+            visibility: visible !important;
+            z-index: 10;
+            position: relative;
+        }
+
+        .floating-edit-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .floating-edit-btn:hover {
+            transform: scale(1.05);
+            background-color: #1d4ed8;
+        }
+
+        .floating-edit-btn svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        /* Ensure header edit button is visible */
+        .profile-header-edit-btn {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        /* Fix profile image size and positioning */
+        .profile-header-image-container {
+            position: absolute;
+            left: 8px;
+            bottom: -16px;
+        }
+
+        .profile-header-image-wrapper {
+            width: 120px;
+            height: 120px;
+            padding: 2px;
+            background: white;
+            border-radius: 100%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .profile-header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 100%;
+        }
+
+        .profile-header-content {
+            padding-top: 5rem;
+            padding-bottom: 1.5rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Media query for larger screens */
+        @media (min-width: 768px) {
+            .profile-header-content {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 640px) {
+            .profile-header-content {
+                padding-top: 6rem;
+            }
+            
+            .profile-header-image-container {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Enhanced profile page styling */
+        .page-section {
+            margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: visible;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .profile-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .profile-header-bg {
+            height: 12rem;
+            background-image: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 2.5rem;
+        }
+
+        .profile-header-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.6;
+        }
+
+        .profile-header-image-container {
+            position: absolute;
+            left: 2rem;
+            bottom: -4rem;
+            z-index: 20;
+            height: 8rem;
+            width: 8rem;
+        }
+
+        .profile-header-image-wrapper {
+            width: 7.5rem;
+            height: 7.5rem;
+            padding: 0.2rem;
+            background: white;
+            border-radius: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            border: 3px solid white;
+            overflow: hidden;
+        }
+
+        .profile-header-image-wrapper:hover {
+            transform: scale(1.03);
+        }
+
+        .profile-header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 100%;
+        }
+
+        .profile-header-content {
+            padding-top: 5rem;
+            margin-left: 8rem;
+        }
+
+        @media (max-width: 640px) {
+            .profile-header-content {
+                margin-left: 0;
+                padding-top: 6rem;
+            }
+        }
+
+        .profile-section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #f3f4f6;
+            position: relative;
+        }
+
+        .profile-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 3rem;
+            height: 2px;
+            background-color: #3b82f6;
+        }
+
+        .data-item {
+            margin-bottom: 1.25rem;
+        }
+
+        .data-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .data-value {
+            font-size: 1rem;
+            color: #1f2937;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            background: #f9fafb;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            background: white;
+            border-color: #93c5fd;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+
+        .form-input:disabled,
+        .form-input[readonly] {
+            background-color: #f3f4f6;
+            cursor: not-allowed;
+        }
+
+        .form-hint {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 0.35rem;
+        }
+
+        .tab-nav {
+            display: flex;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-button {
+            padding: 0.75rem 1.25rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #6b7280;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab-button.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #4b5563;
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f9fafb;
+            border-color: #d1d5db;
+        }
+
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .alert-error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
+        .alert-success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .floating-edit-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #3b82f6, #2563eb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.5), 0 0 0 rgba(37, 99, 235, 0);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .floating-edit-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.6), 0 0 0 6px rgba(37, 99, 235, 0.1);
+        }
+
+        .floating-edit-btn:active {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.5);
+        }
+
+        .floating-edit-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .floating-edit-btn:hover svg {
+            transform: rotate(-10deg);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            padding: 1rem 0;
+            color: #6b7280;
+        }
+
+        .breadcrumb a {
+            color: #6b7280;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #3b82f6;
+        }
+
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+            color: #9ca3af;
+        }
+
+        .breadcrumb-current {
+            color: #3b82f6;
+            font-weight: 500;
+        }
+
+        /* Improved edit button */
+        .edit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            cursor: pointer;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        .edit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+            background-color: #2563eb;
+        }
+
+        .edit-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+
+        .edit-btn-icon {
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn:hover .edit-btn-icon {
+            transform: rotate(-10deg);
+        }
+	</style>
+</head>
+
+<body class="bg-gray-100 overflow-x-hidden">
+	<!-- Header with Blue Background -->
+	<header class="fixed w-full z-50 transition-all duration-300 bg-blue-900" id="main-header" style="background-color: #1e3a8a !important;">
+		<div class="container mx-auto flex justify-between items-center p-4">
+			<!-- Logo -->
+			<div class="flex items-center space-x-4">
+				<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+					<span class="text-blue-600 text-lg font-bold">LC</span>
+				</div>
+				<p class="text-2xl font-bold tracking-wide">
+					<span class="text-white">Legal</span><span class="text-green-400">Connect</span>
+				</p>
+			</div>
+
+			<!-- Navigation -->
+			<nav class="hidden md:flex space-x-8 text-lg font-medium text-white">
+				<a href="home.html" class="hover:text-green-400 transition">Home</a>
+				<div class="relative nav-services">
+					<a href="#services" class="hover:text-green-400 transition">Services</a>
+					<div class="services-dropdown">
+						<a href="#" class="flex items-center">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+							</svg>
+							Legal Consultation
+						</a>
+						<a href="#" class="flex items-center">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+							</svg>
+							Document Verification
+						</a>
+						<a href="#" class="flex items-center">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+							</svg>
+							Dispute Resolution
+						</a>
+						<a href="#" class="flex items-center">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+							</svg>
+							Contract Review
+						</a>
+						<a href="#" class="flex items-center">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+							</svg>
+							Legal Drafting
+						</a>
+						<a href="#" class="flex items-center">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+							</svg>
+							Intellectual Property
+						</a>
+					</div>
+				</div>
+				<a href="#" class="hover:text-green-400 transition provider-nav" id="provider-nav-link" style="display: none;">Appointments</a>
+				<a href="#" class="hover:text-green-400 transition client-nav" id="client-nav-link">Find Professionals</a>
+				<a href="about.html" class="hover:text-green-400 transition">About</a>
+			</nav>
+
+			<!-- Profile Section -->
+            <div class="relative">
+                <div id="profile-dropdown-toggle" class="cursor-pointer">
+                    <img id="profile-image" src="../images/profile-avatar.png" alt="Profile" class="w-12 h-12 rounded-full object-cover border-2 border-white user-image">
+                </div>
+                
+                <div id="profile-dropdown" class="dropdown-menu absolute right-0 mt-2 bg-white rounded-lg shadow-lg">
+                    <div class="p-4 border-b flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full mr-3">
+                            <img src="../images/profile-avatar.png" alt="Profile" class="w-full h-full rounded-full object-cover user-image">
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 user-name">Loading...</h3>
+                            <p class="text-xs text-gray-500 user-email">Loading...</p>
+                        </div>
+                    </div>
+                    <a href="my-profile.html" class="hover:bg-gray-100 px-4 py-2 block">My Profile</a>
+                    <button id="logout-btn" class="hover:bg-gray-100 px-4 py-2 block w-full text-left text-red-500 cursor-pointer">Logout</button>
+                </div>
+            </div>
+
+			<!-- Mobile Menu Toggle -->
+			<button class="md:hidden text-white focus:outline-none" id="menu-toggle">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+				</svg>
+			</button>
+		</div>
+	</header>
+
+	<!-- Mobile Menu -->
+	<div class="fixed w-full bg-blue-900 text-white z-40 hidden" id="mobile-menu">
+        <div class="container mx-auto p-4">
+            <!-- Profile Section for Mobile -->
+            <div class="flex items-center space-x-4 mb-4 pb-4 border-b border-blue-700">
+                <img id="mobile-profile-image" src="../images/profile-avatar.png" alt="Profile" class="w-12 h-12 rounded-full object-cover user-image">
+                <div>
+                    <h4 class="font-semibold user-name">Loading...</h4>
+                    <p class="text-sm text-gray-300 user-email">Loading...</p>
+                </div>
+            </div>
+            <a href="home.html" class="block py-2 border-b border-blue-700">Home</a>
+            <a href="#services" class="block py-2 border-b border-blue-700">Services</a>
+            <a href="#" class="block py-2 border-b border-blue-700 provider-nav" style="display: none;">Appointments</a>
+            <a href="professionals.html" class="block py-2 border-b border-blue-700 client-nav">Find Professionals</a>
+            <a href="about.html" class="block py-2 border-b border-blue-700">About</a>
+            <div class="mt-4 space-y-2">
+                <a href="my-profile.html" class="block py-2">My Profile</a>
+                <button id="mobile-logout-btn" class="block py-2 w-full text-left text-red-400 cursor-pointer">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-12 bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-5xl mx-auto">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb mb-6">
+                    <a href="home.html">Home</a>
+                    <span class="breadcrumb-separator">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                    <span class="breadcrumb-current">My Profile</span>
+                </div>
+
+                <!-- Profile Header -->
+                <div class="profile-card page-section mb-8">
+                    <div class="profile-header-bg">
+                        <div class="profile-header-image-container">
+                            <div class="profile-header-image-wrapper">
+                                <img id="profile-header-image" src="../images/profile-avatar.png" alt="Profile" class="profile-header-image user-image">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-header-content">
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 user-name mb-1">Loading...</h1>
+                            <p class="text-gray-600 user-email">Loading...</p>
+                            <div class="mt-2">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 user-type">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    Loading...
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mt-4 md:mt-0">
+                            <button id="edit-profile-btn" class="edit-btn profile-header-edit-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 edit-btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                </svg>
+                                Edit Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="tab-nav">
+                    <button id="tab-profile" class="tab-button active">
+                        Profile Information
+                    </button>
+                    <button id="tab-edit" class="tab-button hidden">
+                        Edit Profile
+                    </button>
+                </div>
+
+                <!-- Profile View Section -->
+                <div id="profile-view" class="profile-card page-section p-6 md:p-8">
+                    <div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
+                        <!-- Personal Information -->
+                        <div>
+                            <h3 class="profile-section-title">Personal Information</h3>
+                            <div class="space-y-4">
+                                <div class="data-item">
+                                    <p class="data-label">Full Name</p>
+                                    <p class="data-value user-name">Loading...</p>
+                                </div>
+                                <div class="data-item">
+                                    <p class="data-label">Email Address</p>
+                                    <p class="data-value user-email">Loading...</p>
+                                </div>
+                                <div class="data-item">
+                                    <p class="data-label">Phone Number</p>
+                                    <p class="data-value user-phone">Loading...</p>
+                                </div>
+                                <div class="data-item">
+                                    <p class="data-label">User Type</p>
+                                    <p class="data-value user-type">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Provider Information (shown only for providers) -->
+                        <div id="provider-details" class="provider-only hidden">
+                            <h3 class="profile-section-title">Professional Information</h3>
+                            <div class="space-y-4">
+                                <div class="data-item">
+                                    <p class="data-label">Provider Type</p>
+                                    <p class="data-value provider-type">Loading...</p>
+                                </div>
+                                <div class="data-item">
+                                    <p class="data-label">License Number</p>
+                                    <p class="data-value provider-license">Loading...</p>
+                                </div>
+                                <div class="data-item">
+                                    <p class="data-label">Bio</p>
+                                    <p class="data-value provider-bio">Loading...</p>
+                                </div>
+                                <div class="data-item">
+                                    <p class="data-label">Services Offered</p>
+                                    <p class="data-value provider-services">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Form Section (Hidden by default) -->
+                <div id="profile-edit" class="profile-card page-section p-6 md:p-8 hidden">
+                    <form id="edit-profile-form">
+                        <div class="grid md:grid-cols-2 gap-x-8 gap-y-4">
+                            <!-- Personal Information Edit -->
+                            <div>
+                                <h3 class="profile-section-title">Personal Information</h3>
+                                <div class="space-y-4">
+                                    <div class="form-group">
+                                        <label for="first-name" class="form-label">First Name</label>
+                                        <input type="text" id="first-name" name="first_name" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last-name" class="form-label">Last Name</label>
+                                        <input type="text" id="last-name" name="last_name" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" id="email" name="email" class="form-input" readonly>
+                                        <p class="form-hint">Email cannot be changed</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone" class="form-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Provider Information Edit (shown only for providers) -->
+                            <div id="provider-details-edit" class="provider-only hidden">
+                                <h3 class="profile-section-title">Professional Information</h3>
+                                <div class="space-y-4">
+                                    <div class="form-group">
+                                        <label for="provider-type" class="form-label">Provider Type</label>
+                                        <select id="provider-type" name="provider_type" class="form-input">
+                                            <option value="lawyer">Lawyer</option>
+                                            <option value="attorney">Attorney</option>
+                                            <option value="paralegal">Paralegal</option>
+                                            <option value="consultant">Legal Consultant</option>
+                                            <option value="notary">Notary Public</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="license-number" class="form-label">License Number</label>
+                                        <input type="text" id="license-number" name="license_number" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bio" class="form-label">Bio</label>
+                                        <textarea id="bio" name="bio" rows="4" class="form-input"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="services-offered" class="form-label">Services Offered</label>
+                                        <textarea id="services-offered" name="services_offered" rows="3" class="form-input"></textarea>
+                                        <p class="form-hint">Separate services with commas</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit and Cancel Buttons -->
+                        <div class="mt-8 pt-6 border-t border-gray-200 flex justify-end space-x-4">
+                            <button type="button" id="cancel-edit-btn" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Save Changes
+                            </button>
+                        </div>
+                        <div id="form-error" class="alert alert-error hidden"></div>
+                        <div id="form-success" class="alert alert-success hidden"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Edit Button -->
+    <button id="floating-edit-btn" class="floating-edit-btn" title="Edit Profile">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+		<div class="container mx-auto px-6">
+			<div class="grid md:grid-cols-4 gap-8">
+				<div>
+					<h3 class="text-xl font-semibold mb-4">LegalConnect</h3>
+					<p class="text-gray-400">Bridging the gap between legal professionals and clients.</p>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+					<ul class="space-y-2">
+						<li><a href="home.html" class="hover:text-green-400 transition">Home</a></li>
+						<li><a href="#" class="hover:text-green-400 transition">Services</a></li>
+						<li><a href="about.html" class="hover:text-green-400 transition">About</a></li>
+						<li><a href="contactsupport.html" class="hover:text-green-400 transition">Contact</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold mb-4">Legal</h3>
+					<ul class="space-y-2">
+						<li><a href="privacy.html" class="hover:text-green-400 transition">Privacy Policy</a></li>
+						<li><a href="privacy.html" class="hover:text-green-400 transition">Terms of Service</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold mb-4">Connect</h3>
+					<div class="flex space-x-4">
+						<a href="https://www.facebook.com/" class="hover:text-green-400 transition">Facebook</a>
+						<a href="https://x.com/?lang=en" class="hover:text-green-400 transition">Twitter</a>
+						<a href="https://www.linkedin.com/login" class="hover:text-green-400 transition">LinkedIn</a>
+					</div>
+				</div>
+			</div>
+			<div class="text-center text-gray-500 mt-8 pt-4 border-t border-gray-700">
+				&copy; 2025 LegalConnect. All rights reserved.
+			</div>
+		</div>
+	</footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // User data
+        let userData = null;
+
+        // Utility for showing messages
+        function showMessage(elementId, message, isError = false) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.classList.remove('hidden');
+            
+            // Auto-hide after 5 seconds if it's a success message
+            if (!isError) {
+                setTimeout(() => {
+                    element.classList.add('hidden');
+                }, 5000);
+            }
+        }
+
+        // Check user authentication
+        function checkUserAuthentication() {
+            console.log("Checking user authentication");
+            
+            // Get session ID from localStorage or sessionStorage
+            let sessionId = localStorage.getItem('session_id');
+            if (!sessionId) {
+                sessionId = sessionStorage.getItem('session_id');
+            }
+
+            if (!sessionId) {
+                console.log("No session ID found, redirecting to login");
+                window.location.href = 'login.html';
+                return Promise.reject("No session ID found");
+            }
+
+            console.log("Session ID found, checking authentication:", sessionId ? "Session exists" : "No session");
+            
+            // Get the userId directly from localStorage if it exists
+            const storedUserId = localStorage.getItem('userId');
+            if (storedUserId) {
+                console.log("User ID found in localStorage:", storedUserId);
+            }
+            
+            // Attempt to get stored user data
+            const storedUserData = localStorage.getItem('userData');
+            if (storedUserData) {
+                try {
+                    const parsedUserData = JSON.parse(storedUserData);
+                    console.log("Stored user data found:", parsedUserData ? "User data exists" : "No user data");
+                    
+                    // Use this as a fallback only
+                    userData = parsedUserData;
+                } catch (e) {
+                    console.error("Error parsing stored user data:", e);
+                }
+            }
+            
+            // Check if user is logged in by calling our backend API
+            return fetch('../backend/api/check-auth.php', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + sessionId,
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                console.log("Auth response status:", response.status);
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        console.error("Auth error response:", text);
+                        throw new Error(`Authentication failed with status: ${response.status}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Authentication response:", data);
+                
+                if (data.authenticated && data.user) {
+                    // Save user data
+                    userData = data.user;
+                    
+                    // Ensure user has an id
+                    if (!userData.id && storedUserId) {
+                        userData.id = storedUserId;
+                    }
+                    
+                    // Set userType in localStorage
+                    if (userData.user_type) {
+                        localStorage.setItem('userType', userData.user_type);
+                    }
+                    
+                    // Store this data for future use
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    if (userData.id) {
+                        localStorage.setItem('userId', userData.id);
+                    }
+                    
+                    return userData;
+                } else {
+                    console.log("User not authenticated");
+                    // Clear any leftover data
+                    localStorage.removeItem('userData');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('session_id');
+                    sessionStorage.removeItem('session_id');
+                    
+                    // Redirect to login
+                    window.location.href = 'login.html';
+                    return null;
+                }
+            })
+            .catch(error => {
+                console.error("Authentication error:", error);
+                // Try to use stored user data if available
+                if (userData) {
+                    console.log("Using stored user data as fallback");
+                    return userData;
+                }
+                
+                // Redirect to login
+                window.location.href = 'login.html';
+                return null;
+            });
+        }
+
+        // Update UI with user data
+        function updateUserInterface(user) {
+            if (!user) return;
+            
+            // Update all elements with class 'user-name'
+            document.querySelectorAll('.user-name').forEach(element => {
+                element.textContent = user.name || 'User';
+            });
+            
+            // Update all elements with class 'user-email'
+            document.querySelectorAll('.user-email').forEach(element => {
+                element.textContent = user.email || 'email@example.com';
+            });
+            
+            // Update phone number
+            document.querySelectorAll('.user-phone').forEach(element => {
+                element.textContent = user.phone || 'Not provided';
+            });
+            
+            // Update user type
+            document.querySelectorAll('.user-type').forEach(element => {
+                element.textContent = user.user_type === 'provider' ? 'Legal Professional' : 'Client';
+            });
+            
+            // If user is a provider, show provider details
+            if (user.user_type === 'provider') {
+                document.querySelectorAll('.provider-only').forEach(element => {
+                    element.classList.remove('hidden');
+                });
+                
+                // Update provider-specific fields
+                document.querySelectorAll('.provider-type').forEach(element => {
+                    element.textContent = user.provider_type || 'Not specified';
+                });
+                
+                document.querySelectorAll('.provider-license').forEach(element => {
+                    element.textContent = user.license_number || 'Not specified';
+                });
+                
+                document.querySelectorAll('.provider-bio').forEach(element => {
+                    element.textContent = user.bio || 'No bio provided';
+                });
+                
+                document.querySelectorAll('.provider-services').forEach(element => {
+                    element.textContent = user.services_offered || 'Not specified';
+                });
+            }
+        }
+
+        // Fill the edit form with user data
+        function populateEditForm(user) {
+            if (!user) return;
+            
+            // Split name into first and last name
+            const nameParts = user.name.split(' ');
+            document.getElementById('first-name').value = nameParts[0] || '';
+            document.getElementById('last-name').value = nameParts.slice(1).join(' ') || '';
+            
+            // Set other fields
+            document.getElementById('email').value = user.email || '';
+            document.getElementById('phone').value = user.phone || '';
+            
+            // If user is a provider, populate provider fields
+            if (user.user_type === 'provider') {
+                document.getElementById('provider-type').value = user.provider_type || '';
+                document.getElementById('license-number').value = user.license_number || '';
+                document.getElementById('bio').value = user.bio || '';
+                document.getElementById('services-offered').value = user.services_offered || '';
+            }
+        }
+
+        // Check API endpoint
+        function checkAPIEndpoint(submitButton, originalButtonText) {
+            return fetch('../backend/api/update-profile.php', {
+                method: 'OPTIONS',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok && response.status !== 405) {
+                    console.error("API endpoint check failed:", response.status);
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                    showMessage('form-error', 'API endpoint not available. Please check your server configuration.', true);
+                    return false;
+                }
+                return true;
+            })
+            .catch(error => {
+                console.error("API endpoint check error:", error);
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+                showMessage('form-error', 'Unable to connect to the server. Please check your internet connection.', true);
+                return false;
+            });
+        }
+
+        // Handle form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            // Hide any previous messages
+            document.getElementById('form-error').classList.add('hidden');
+            document.getElementById('form-success').classList.add('hidden');
+            
+            // Check if userData exists and has an id
+            if (!userData || !userData.id) {
+                console.error("User data is missing or incomplete", userData);
+                showMessage('form-error', 'User information is missing. Please refresh the page and try again.', true);
+                return;
+            }
+            
+            // Display loading state
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.innerHTML = 'Saving...';
+            submitButton.disabled = true;
+            
+            // First check if the API endpoint is available
+            checkAPIEndpoint(submitButton, originalButtonText)
+                .then(endpointAvailable => {
+                    if (!endpointAvailable) {
+                        return;
+                    }
+                    
+                    const formData = {
+                        user_id: userData.id,
+                        first_name: document.getElementById('first-name').value.trim(),
+                        last_name: document.getElementById('last-name').value.trim(),
+                        phone: document.getElementById('phone').value.trim(),
+                    };
+                    
+                    // Validate required fields
+                    if (!formData.first_name || !formData.last_name) {
+                        showMessage('form-error', 'First name and last name are required.', true);
+                        submitButton.innerHTML = originalButtonText;
+                        submitButton.disabled = false;
+                        return;
+                    }
+                    
+                    // Add provider fields if user is a provider
+                    if (userData.user_type === 'provider') {
+                        formData.provider_type = document.getElementById('provider-type').value;
+                        formData.license_number = document.getElementById('license-number').value;
+                        formData.bio = document.getElementById('bio').value;
+                        formData.services_offered = document.getElementById('services-offered').value;
+                    }
+                    
+                    // Get session ID
+                    let sessionId = localStorage.getItem('session_id');
+                    if (!sessionId) {
+                        sessionId = sessionStorage.getItem('session_id');
+                    }
+                    
+                    console.log("Updating profile with data:", JSON.stringify(formData));
+                    console.log("Using session ID:", sessionId ? 'Session ID exists' : 'No session ID');
+                    
+                    // Submit form data
+                    fetch('../backend/api/update-profile.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': sessionId ? 'Bearer ' + sessionId : ''
+                        },
+                        body: JSON.stringify(formData),
+                        credentials: 'same-origin'
+                    })
+                    .then(response => {
+                        console.log("Profile update response status:", response.status);
+                        if (!response.ok) {
+                            return response.text().then(text => {
+                                try {
+                                    return JSON.parse(text);
+                                } catch (e) {
+                                    console.error("Error parsing response:", text);
+                                    throw new Error(`Server responded with status: ${response.status}`);
+                                }
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Update response:", data);
+                        submitButton.innerHTML = originalButtonText;
+                        submitButton.disabled = false;
+                        
+                        if (data.success) {
+                            // Show success message
+                            showMessage('form-success', 'Profile updated successfully!');
+                            
+                            // Update local userData
+                            userData.name = `${formData.first_name} ${formData.last_name}`.trim();
+                            userData.phone = formData.phone;
+                            
+                            if (userData.user_type === 'provider') {
+                                userData.provider_type = formData.provider_type;
+                                userData.license_number = formData.license_number;
+                                userData.bio = formData.bio;
+                                userData.services_offered = formData.services_offered;
+                            }
+                            
+                            // Update localStorage
+                            localStorage.setItem('userData', JSON.stringify(userData));
+                            
+                            // Update UI
+                            updateUserInterface(userData);
+                            
+                            // Switch back to profile view after a short delay
+                            setTimeout(() => {
+                                showProfileView();
+                            }, 2000);
+                        } else {
+                            // Show error message
+                            showMessage('form-error', data.message || data.error || 'Failed to update profile. Please try again.', true);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Update error:", error);
+                        submitButton.innerHTML = originalButtonText;
+                        submitButton.disabled = false;
+                        showMessage('form-error', 'An error occurred while updating your profile. Please try again later.', true);
+                    });
+                });
+        }
+
+        // Switch to edit mode
+        function showEditForm() {
+            document.getElementById('profile-view').classList.add('hidden');
+            document.getElementById('profile-edit').classList.remove('hidden');
+            
+            document.getElementById('tab-profile').classList.remove('border-blue-600', 'text-blue-600');
+            document.getElementById('tab-profile').classList.add('border-transparent', 'text-gray-500');
+            
+            document.getElementById('tab-edit').classList.remove('hidden', 'border-transparent', 'text-gray-500');
+            document.getElementById('tab-edit').classList.add('border-blue-600', 'text-blue-600');
+            
+            // Populate form with user data
+            populateEditForm(userData);
+            
+            // Ensure edit form is visible by scrolling to it
+            document.getElementById('profile-edit').scrollIntoView({behavior: 'smooth'});
+        }
+
+        // Switch to profile view
+        function showProfileView() {
+            document.getElementById('profile-edit').classList.add('hidden');
+            document.getElementById('profile-view').classList.remove('hidden');
+            
+            document.getElementById('tab-edit').classList.remove('border-blue-600', 'text-blue-600');
+            document.getElementById('tab-edit').classList.add('border-transparent', 'text-gray-500');
+            
+            document.getElementById('tab-profile').classList.remove('border-transparent', 'text-gray-500');
+            document.getElementById('tab-profile').classList.add('border-blue-600', 'text-blue-600');
+        }
+
+        // DOM events
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication and load user data
+            checkUserAuthentication().then(user => {
+                if (user) {
+                    console.log("User authenticated:", user);
+                    updateUserInterface(user);
+                }
+            });
+            
+            // Tab switching
+            document.getElementById('tab-profile').addEventListener('click', showProfileView);
+            document.getElementById('tab-edit').addEventListener('click', showEditForm);
+            
+            // Edit button
+            document.getElementById('edit-profile-btn').addEventListener('click', showEditForm);
+            
+            // Cancel button
+            document.getElementById('cancel-edit-btn').addEventListener('click', showProfileView);
+            
+            // Form submission
+            document.getElementById('edit-profile-form').addEventListener('submit', handleFormSubmit);
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Profile dropdown toggle
+            const profileToggle = document.getElementById('profile-dropdown-toggle');
+            const profileDropdown = document.getElementById('profile-dropdown');
+            
+            profileToggle.addEventListener('click', () => {
+                profileDropdown.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!profileToggle.contains(e.target)) {
+                    profileDropdown.classList.remove('show');
+                }
+            });
+        });
+
+        // User type-specific navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get user type from localStorage
+            const userType = localStorage.getItem('userType');
+            
+            if (userType === 'provider') {
+                // Show provider navigation links
+                document.querySelectorAll('.provider-nav').forEach(el => {
+                    el.style.display = 'block';
+                    // For provider, point to provider dashboard appointments
+                    if (el.id === 'provider-nav-link') {
+                        el.href = 'provider-dashboard.html#appointment-requests';
+                    } else {
+                        el.href = 'provider-dashboard.html#appointment-requests';
+                    }
+                });
+                
+                // Hide client navigation links
+                document.querySelectorAll('.client-nav').forEach(el => {
+                    el.style.display = 'none';
+                });
+            } else {
+                // Show client navigation links
+                document.querySelectorAll('.client-nav').forEach(el => {
+                    el.style.display = 'block';
+                    if (el.id === 'client-nav-link') {
+                        el.href = 'professionals.html';
+                    }
+                });
+                
+                // Hide provider navigation links
+                document.querySelectorAll('.provider-nav').forEach(el => {
+                    el.style.display = 'none';
+                });
+            }
+            
+            // Setup logout buttons
+            setupLogoutButtons();
+        });
+        
+        // Setup logout buttons
+        function setupLogoutButtons() {
+            try {
+                // Add listener for logout button
+                const logoutBtn = document.getElementById('logout-btn');
+                if (logoutBtn) {
+                    // Remove any existing event listeners to prevent duplicates
+                    logoutBtn.removeEventListener('click', handleLogout);
+                    // Add the event listener
+                    logoutBtn.addEventListener('click', handleLogout);
+                    console.log("Logout button event listener added");
+                } else {
+                    console.error("Logout button not found in the DOM");
+                }
+                
+                // Add listener for mobile logout button
+                const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+                if (mobileLogoutBtn) {
+                    // Remove any existing event listeners to prevent duplicates
+                    mobileLogoutBtn.removeEventListener('click', handleLogout);
+                    // Add the event listener
+                    mobileLogoutBtn.addEventListener('click', handleLogout);
+                    console.log("Mobile logout button event listener added");
+                } else {
+                    console.error("Mobile logout button not found in the DOM");
+                }
+            } catch (error) {
+                console.error("Error setting up logout buttons:", error);
+            }
+        }
+        
+        // Logout function
+        function handleLogout(e) {
+            e.preventDefault();
+            console.log("Logout initiated");
+            
+            // Get session ID from localStorage or sessionStorage
+            let sessionId = localStorage.getItem('session_id');
+            if (!sessionId) {
+                sessionId = sessionStorage.getItem('session_id');
+            }
+            console.log("Logging out session:", sessionId ? 'Session ID exists' : 'No session ID found');
+            
+            // Send logout request
+            fetch('../backend/api/logout.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': sessionId ? 'Bearer ' + sessionId : ''
+                },
+                body: JSON.stringify({ session_id: sessionId }),
+                credentials: 'include'
+            })
+            .then(response => {
+                console.log("Logout response status:", response.status);
+                // Check if the response is ok (status 200-299) - if not, we still want to logout locally
+                if (!response.ok) {
+                    console.warn("Logout response not ok:", response.status);
+                    // Continue with client-side logout even if server response isn't successful
+                    return { success: true, message: "Client-side logout only" };
+                }
+                
+                return response.text().then(text => {
+                    // Try to parse as JSON, but handle empty responses
+                    if (!text) {
+                        console.warn("Empty response received from logout server");
+                        return { success: true, message: "No server response" };
+                    }
+                    try {
+                        return JSON.parse(text);
+                    } catch (e) {
+                        console.error("Error parsing JSON logout response:", e);
+                        console.log("Raw logout response:", text);
+                        return { success: true, message: "Invalid server response" };
+                    }
+                });
+            })
+            .then(data => {
+                console.log("Logout response data:", data);
+                
+                // Clear localStorage items
+                localStorage.removeItem('userData');
+                localStorage.removeItem('appointments');
+                localStorage.removeItem('session_id');
+                sessionStorage.removeItem('session_id');
+                // Remove user type from localStorage
+                localStorage.removeItem('userType');
+                console.log("Cleared session storage and user type");
+                
+                // Clear any cookies
+                document.cookie.split(";").forEach(function(c) {
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                });
+                console.log("Cleared cookies");
+                
+                // Redirect to login page
+                console.log("Redirecting to login page");
+                window.location.href = 'login.html';
+            })
+            .catch(error => {
+                console.error('Logout Error Details:', error);
+                
+                // If the fetch fails, still clear local storage and redirect
+                localStorage.removeItem('userData');
+                localStorage.removeItem('appointments');
+                localStorage.removeItem('session_id');
+                sessionStorage.removeItem('session_id');
+                // Remove user type from localStorage
+                localStorage.removeItem('userType');
+                
+                // Clear any cookies
+                document.cookie.split(";").forEach(function(c) {
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                });
+                
+                // Redirect anyway
+                window.location.href = 'login.html';
+            });
+        }
+
+        // Add event listener for floating edit button
+        document.getElementById('floating-edit-btn').addEventListener('click', showEditForm);
+
+        // Add scroll event listener to change header background
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html> 

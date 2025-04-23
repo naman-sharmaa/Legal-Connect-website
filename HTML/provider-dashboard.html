@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LegalConnect - Provider Dashboard</title>
+	<link rel="stylesheet" href="../src/output.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+	<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 250px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            z-index: 100;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+            animation: fadeIn 0.2s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .dropdown-menu a, .dropdown-menu button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 16px;
+            color: #333;
+            transition: all 0.2s;
+            border-radius: 8px;
+            margin: 4px;
+        }
+        
+        .dropdown-menu a:hover, .dropdown-menu button:hover {
+            background-color: #f4f7ff;
+            color: #3b82f6;
+        }
+        
+        .main-header-shadow {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+	</style>
+</head>
+
+<body class="bg-gray-50 overflow-x-hidden">
+	<!-- Header with Background -->
+	<header class="fixed w-full z-50 transition-all duration-300 bg-blue-900 main-header-shadow" id="main-header">
+		<div class="container mx-auto flex justify-between items-center p-4">
+			<!-- Logo -->
+			<div class="flex items-center space-x-4">
+				<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+					<span class="text-blue-600 text-lg font-bold">LC</span>
+				</div>
+				<p class="text-2xl font-bold tracking-wide">
+					<span class="text-white">Legal</span><span class="text-green-400">Connect</span>
+				</p>
+			</div>
+
+			<!-- Navigation -->
+			<nav class="hidden md:flex space-x-8 text-lg font-medium text-white">
+				<a href="home.html" class="hover:text-green-400 transition">Home</a>
+				<a href="#appointment-requests" class="hover:text-green-400 transition">Appointments</a>
+				<a href="#profile-section" class="hover:text-green-400 transition">My Profile</a>
+				<a href="about.html" class="hover:text-green-400 transition">About</a>
+			</nav>
+
+			<!-- Profile Section -->
+			<!-- Profile Section -->
+            <div class="relative">
+                <div id="profile-dropdown-toggle" class="cursor-pointer">
+                    <img id="profile-image" src="../images/vector-flat-illustration-grayscale-avatar-user-profile-person-icon-gender-neutral-silhouette-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-875.avif" alt="Profile" class="w-12 h-12 rounded-full object-cover border-2 border-white user-image">
+                </div>
+                
+                <div id="profile-dropdown" class="dropdown-menu absolute right-0 mt-2 bg-white rounded-lg shadow-lg">
+                    <div class="p-4 border-b flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full mr-3">
+                            <img src="../images/vector-flat-illustration-grayscale-avatar-user-profile-person-icon-gender-neutral-silhouette-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-875.avif" alt="Profile" class="w-full h-full rounded-full object-cover user-image">
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 user-name">Loading...</h3>
+                            <p class="text-xs text-gray-500 user-email">Loading...</p>
+                        </div>
+                    </div>
+                    <a href="my-profile.html" class="hover:bg-gray-100 px-4 py-2 block">My Profile</a>
+                    <button id="logout-btn" class="hover:bg-gray-100 px-4 py-2 block w-full text-left text-red-500 cursor-pointer">Logout</button>
+                </div>
+            </div>
+
+			<!-- Mobile Menu Toggle -->
+			<button class="md:hidden text-white focus:outline-none" id="menu-toggle">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+				</svg>
+			</button>
+		</div>
+	</header>
+
+	<!-- Mobile Menu -->
+	<nav class="fixed top-20 right-0 left-0 z-40 bg-white shadow-lg rounded-b-lg mt-1 p-6 hidden md:hidden" id="mobile-menu">
+		<div class="flex flex-col space-y-4 text-gray-800">
+			<a href="home.html" class="font-medium hover:text-blue-600 transition">Home</a>
+			<a href="#appointment-requests" class="font-medium hover:text-blue-600 transition">Appointments</a>
+			<a href="#profile-section" class="font-medium hover:text-blue-600 transition">My Profile</a>
+			<a href="about.html" class="font-medium hover:text-blue-600 transition">About</a>
+		</div>
+	</nav>
+
+	<!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-24">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Provider Dashboard</h1>
+            <p class="text-gray-600">Manage your clients and appointments in one place</p>
+        </div>
+        
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center">
+                <div class="rounded-full w-12 h-12 flex items-center justify-center bg-blue-100 text-blue-700 mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-gray-500 text-sm">Total Clients</h3>
+                    <p class="text-2xl font-bold text-gray-800" id="total-clients-count">--</p>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center">
+                <div class="rounded-full w-12 h-12 flex items-center justify-center bg-green-100 text-green-700 mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-gray-500 text-sm">New Clients (This Month)</h3>
+                    <p class="text-2xl font-bold text-gray-800" id="new-clients-count">--</p>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center">
+                <div class="rounded-full w-12 h-12 flex items-center justify-center bg-purple-100 text-purple-700 mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-gray-500 text-sm">Active Status</h3>
+                    <p class="text-2xl font-bold text-gray-800">Online</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Client List Section -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 border-b border-blue-800">
+                <h2 class="text-xl font-semibold text-white">Client List</h2>
+                <p class="text-sm text-blue-100">All registered clients in the system</p>
+            </div>
+            
+            <div class="p-6">
+                <div id="loading-clients" class="text-center py-8">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+                    <p class="mt-4 text-gray-600">Loading clients...</p>
+                </div>
+                
+                
+                    
+                    <!-- Client Cards Grid -->
+                    <div id="clients-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Client cards will be added here dynamically -->
+                    </div>
+                </div>
+                
+                <div id="no-clients-message" class="hidden text-center py-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <p class="text-lg text-gray-500">No clients found in the system.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+	<!-- Footer -->
+	<footer class="bg-blue-900 text-white py-16 mt-16">
+		<div class="container mx-auto px-4">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+				<div>
+					<h3 class="text-lg font-semibold mb-4">About</h3>
+					<p class="text-gray-300">
+						LegalConnect provides a platform for connecting clients with legal service providers. Our mission is to make legal services more accessible to everyone.
+					</p>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+					<ul class="space-y-2 text-gray-300">
+						<li><a href="home.html" class="hover:text-green-400 transition">Home</a></li>
+						<li><a href="services.html" class="hover:text-green-400 transition">Services</a></li>
+						<li><a href="professionals.html" class="hover:text-green-400 transition">Find a Professional</a></li>
+						<li><a href="about.html" class="hover:text-green-400 transition">About</a></li>
+						<li><a href="contact.html" class="hover:text-green-400 transition">Contact</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold mb-4">Connect</h3>
+					<div class="flex space-x-4">
+						<a href="https://www.facebook.com/" class="hover:text-green-400 transition">Facebook</a>
+						<a href="https://x.com/?lang=en" class="hover:text-green-400 transition">Twitter</a>
+						<a href="https://www.linkedin.com/login" class="hover:text-green-400 transition">LinkedIn</a>
+					</div>
+				</div>
+			</div>
+			<div class="text-center text-gray-500 mt-8 pt-4 border-t border-gray-700">
+				&copy; 2025 LegalConnect. All rights reserved.
+			</div>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script>
+		AOS.init({ duration: 1000, once: true });
+        
+        // Setup basic UI components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup profile dropdown
+            const profileToggle = document.getElementById('profile-dropdown-toggle');
+            const profileDropdown = document.getElementById('profile-dropdown');
+            
+            if (profileToggle && profileDropdown) {
+                profileToggle.addEventListener('click', function() {
+                    profileDropdown.classList.toggle('hidden');
+                });
+                
+                // Close dropdown when clicking elsewhere
+                document.addEventListener('click', function(event) {
+                    if (!profileToggle.contains(event.target) && !profileDropdown.contains(event.target)) {
+                        profileDropdown.classList.add('hidden');
+                    }
+                });
+            }
+            
+            // Setup mobile menu
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Setup logout button
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    // Clear storage
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    
+                    // Redirect to login
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+	</script>
+	<script src="js/provider-dashboard.js"></script>
+</body>
+
+</html> 

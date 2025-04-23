@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FAQs - LegalConnect</title>
+	<link rel="stylesheet" href="../src/output.css">
+
+	<!-- AOS Library for Scroll Animations -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+</head>
+
+<body class="bg-gray-100">
+
+	<!-- Header -->
+	<header
+		class="bg-blue-900 bg-opacity-90 text-white shadow-md backdrop-blur-md fixed w-full z-50 transition duration-500">
+		<div class="container mx-auto flex justify-between items-center p-4">
+			<!-- Logo -->
+			<div class="flex items-center space-x-4">
+				<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+					<span class="text-blue-600 text-lg font-bold">LC</span>
+				</div>
+				<p class="text-2xl font-bold tracking-wide">
+					<span class="text-white">Legal</span><span class="text-green-400">Connect</span>
+				</p>
+			</div>
+
+			<!-- Navigation -->
+			<nav class="hidden md:flex space-x-8 text-lg font-medium">
+				<a href="home.html" class="hover:text-green-400 transition">Home</a>
+				<a href="#" class="hover:text-green-400 transition">Services</a>
+				<a href="about.html" class="hover:text-green-400 transition">About</a>
+				<a href="contactsupport.html" class="hover:text-green-400 transition">Contact</a>
+			</nav>
+
+			<!-- Mobile Menu Button -->
+			<button class="md:hidden text-white focus:outline-none" id="menu-toggle">&#9776;</button>
+		</div>
+	</header>
+
+	<!-- Mobile Menu -->
+	<div class="hidden md:hidden bg-blue-900 text-white p-4 mt-16" id="mobile-menu">
+		<a href="home.html" class="block py-2">Home</a>
+		<a href="#" class="block py-2">Services</a>
+		<a href="about.html" class="block py-2">About</a>
+		<a href="contactsupport.html" class="block py-2">Contact</a>
+	</div>
+
+	<main class="pt-20">
+		<!-- Hero Section -->
+		<section class="bg-gradient-to-r from-blue-900 to-green-600 text-white py-20" data-aos="fade-up">
+			<div class="container mx-auto px-6 text-center">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6">Frequently Asked Questions</h1>
+				<p class="text-xl text-gray-200 max-w-3xl mx-auto">Find answers to common questions about LegalConnect and how we connect citizens with legal professionals.</p>
+			</div>
+		</section>
+
+		<!-- FAQ Section -->
+		<section class="py-20 bg-gray-50">
+			<div class="container mx-auto px-6 max-w-4xl">
+				<div class="text-center mb-12">
+					<h2 class="text-3xl font-bold text-blue-900" data-aos="fade-up">General Questions</h2>
+					<p class="text-lg text-gray-600 mt-3" data-aos="fade-up">Basic information about LegalConnect</p>
+				</div>
+
+				<div class="space-y-4">
+					<!-- FAQ Item -->
+					<div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+							<span class="text-lg font-semibold text-blue-900">What is LegalConnect?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">LegalConnect is a platform designed to bridge the gap between citizens needing legal assistance and qualified legal professionals. We provide an easy way to find and connect with lawyers, get legal advice, and understand your rights and options.</p>
+						</div>
+					</div>
+
+					<!-- FAQ Item -->
+					<div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+							<span class="text-lg font-semibold text-blue-900">Is LegalConnect free to use?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">Creating an account and browsing lawyers on LegalConnect is completely free. However, when you choose to consult with a lawyer, their fees will apply. We provide transparent pricing information for each lawyer's services upfront.</p>
+						</div>
+					</div>
+
+					<!-- FAQ Item -->
+					<div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+							<span class="text-lg font-semibold text-blue-900">How does LegalConnect verify lawyers?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">We have a rigorous verification process that includes:</p>
+							<ul class="list-disc pl-5 mt-2 space-y-1 text-gray-600">
+								<li>Verification of law degree and Bar Council registration</li>
+								<li>Background checks and professional standing verification</li>
+								<li>Review of previous case experience and specialization</li>
+								<li>Peer reviews and client feedback analysis</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- FAQ Item -->
+					<div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+							<span class="text-lg font-semibold text-blue-900">What types of legal issues can I get help with?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">LegalConnect covers a wide range of legal areas including:</p>
+							<div class="grid md:grid-cols-2 gap-4 mt-3">
+								<div class="bg-blue-50 p-3 rounded-lg">
+									<h4 class="font-semibold text-green-600">Civil Law</h4>
+									<ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+										<li>Family disputes</li>
+										<li>Property matters</li>
+										<li>Consumer complaints</li>
+									</ul>
+								</div>
+								<div class="bg-blue-50 p-3 rounded-lg">
+									<h4 class="font-semibold text-green-600">Criminal Law</h4>
+									<ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+										<li>Bail applications</li>
+										<li>Cyber crimes</li>
+										<li>Theft/Fraud cases</li>
+									</ul>
+								</div>
+								<div class="bg-blue-50 p-3 rounded-lg">
+									<h4 class="font-semibold text-green-600">Corporate Law</h4>
+									<ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+										<li>Business registration</li>
+										<li>Contract drafting</li>
+										<li>Intellectual property</li>
+									</ul>
+								</div>
+								<div class="bg-blue-50 p-3 rounded-lg">
+									<h4 class="font-semibold text-green-600">Other Services</h4>
+									<ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+										<li>Legal document review</li>
+										<li>Notary services</li>
+										<li>Legal counseling</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- For Users Section -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-6 max-w-4xl">
+				<div class="text-center mb-12">
+					<h2 class="text-3xl font-bold text-blue-900" data-aos="fade-up">For Users</h2>
+					<p class="text-lg text-gray-600 mt-3" data-aos="fade-up">Questions about using LegalConnect as a client</p>
+				</div>
+
+				<div class="space-y-4">
+					<!-- FAQ Item -->
+					<div class="bg-gray-50 rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-100 transition">
+							<span class="text-lg font-semibold text-blue-900">How do I find a lawyer on LegalConnect?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">Finding a lawyer is simple:</p>
+							<ol class="list-decimal pl-5 mt-2 space-y-2 text-gray-600">
+								<li>Select your legal issue from our categories</li>
+								<li>Browse lawyer profiles with ratings and reviews</li>
+								<li>Use filters to narrow by location, experience, or fees</li>
+								<li>View detailed profiles with qualifications and case history</li>
+								<li>Contact the lawyer directly through our secure messaging</li>
+							</ol>
+						</div>
+					</div>
+
+					<!-- FAQ Item -->
+					<div class="bg-gray-50 rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-100 transition">
+							<span class="text-lg font-semibold text-blue-900">What information should I prepare before consulting a lawyer?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">To make the most of your consultation, prepare:</p>
+							<ul class="list-disc pl-5 mt-2 space-y-1 text-gray-600">
+								<li>A clear summary of your legal issue</li>
+								<li>Relevant dates and timelines</li>
+								<li>Copies of any documents related to your case</li>
+								<li>List of questions you want to ask</li>
+								<li>Information about any opposing parties</li>
+								<li>Your desired outcome or solution</li>
+							</ul>
+							<p class="mt-3 text-gray-600">This preparation will help the lawyer understand your situation quickly and provide more accurate advice.</p>
+						</div>
+					</div>
+
+					<!-- FAQ Item -->
+					<div class="bg-gray-50 rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-100 transition">
+							<span class="text-lg font-semibold text-blue-900">How are lawyer fees determined?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">Lawyer fees on LegalConnect vary based on several factors:</p>
+							<div class="grid md:grid-cols-2 gap-4 mt-3">
+								<div class="bg-green-50 p-3 rounded-lg">
+									<h4 class="font-semibold text-green-600">Fee Factors</h4>
+									<ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+										<li>Lawyer's experience and specialization</li>
+										<li>Complexity of your legal issue</li>
+										<li>Estimated time required</li>
+										<li>Geographical location</li>
+									</ul>
+								</div>
+								<div class="bg-green-50 p-3 rounded-lg">
+									<h4 class="font-semibold text-green-600">Fee Structures</h4>
+									<ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+										<li>Hourly rates</li>
+										<li>Flat fees for specific services</li>
+										<li>Retainer agreements</li>
+										<li>Contingency fees (where applicable)</li>
+									</ul>
+								</div>
+							</div>
+							<p class="mt-3 text-gray-600">All fees are clearly displayed on lawyer profiles before you contact them. You'll always know the cost upfront.</p>
+						</div>
+					</div>
+
+					<!-- FAQ Item -->
+					<div class="bg-gray-50 rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-100 transition">
+							<span class="text-lg font-semibold text-blue-900">Is my information confidential?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">Yes, we take your privacy and confidentiality very seriously:</p>
+							<ul class="list-disc pl-5 mt-2 space-y-1 text-gray-600">
+								<li>All communications are encrypted</li>
+								<li>We comply with data protection regulations</li>
+								<li>Your case details are only shared with lawyers you choose to contact</li>
+								<li>We never sell or share your information with third parties</li>
+							</ul>
+							<p class="mt-3 text-gray-600">Lawyers on our platform are bound by attorney-client privilege, just as they would be in traditional consultations.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- For Lawyers Section -->
+		<section class="py-20 bg-blue-50">
+			<div class="container mx-auto px-6 max-w-4xl">
+				<div class="text-center mb-12">
+					<h2 class="text-3xl font-bold text-blue-900" data-aos="fade-up">For Lawyers</h2>
+					<p class="text-lg text-gray-600 mt-3" data-aos="fade-up">Questions about joining LegalConnect as a legal professional</p>
+				</div>
+
+				<div class="space-y-4">
+					<!-- FAQ Item -->
+					<div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+							<span class="text-lg font-semibold text-blue-900">How can I join LegalConnect as a lawyer?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">To join LegalConnect as a legal professional:</p>
+							<ol class="list-decimal pl-5 mt-2 space-y-2 text-gray-600">
+								<li>Click on "For Lawyers" in our navigation</li>
+								<li>Complete the registration form with your details</li>
+								<li>Upload required documents (Bar license, ID proof, etc.)</li>
+								<li>Specify your practice areas and expertise</li>
+								<li>Set your availability and consultation preferences</li>
+								<li>Submit for verification (takes 2-3 business days)</li>
+							</ol>
+							<p class="mt-3 text-gray-600">Once approved, your profile will be active and visible to potential clients.</p>
+						</div>
+					</div>
+
+					<!-- FAQ Item -->
+					<div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+							<span class="text-lg font-semibold text-blue-900">What are the benefits of joining LegalConnect?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">LegalConnect offers numerous benefits for legal professionals:</p>
+							<div class="grid md:grid-cols-2 gap-4 mt-3">
+								<div class="bg-blue-100 p-3 rounded-lg">
+									<h4 class="font-semibold text-green-600">Client Acquisition</h4>
+									<ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+										<li>Access to a large pool of potential clients</li>
+										<li>Targeted leads in your practice area</li>
+										<li>Reduced marketing costs</li>
+									</ul>
+								</div>
+								<div class="bg-blue-100 p-3 rounded-lg">
+									<h4 class="font-semibold text-green-600">Practice Management</h4>
+									<ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+										<li>Online scheduling tools</li>
+										<li>Document sharing and e-signature</li>
+										<li>Secure client communication</li>
+									</ul>
+								</div>
+								<div class="bg-blue-100 p-3 rounded-lg">
+									<h4 class="font-semibold text-green-600">Financial Benefits</h4>
+									<ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+										<li>Set your own fees and payment terms</li>
+										<li>Secure online payments</li>
+										<li>Reduced overhead costs</li>
+									</ul>
+								</div>
+								<div class="bg-blue-100 p-3 rounded-lg">
+									<h4 class="font-semibold text-green-600">Professional Growth</h4>
+									<ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+										<li>Client reviews and ratings</li>
+										<li>Continuing education resources</li>
+										<li>Networking opportunities</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- FAQ Item -->
+					<div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+							<span class="text-lg font-semibold text-blue-900">How does LegalConnect handle payments?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">Our payment system is designed to be secure and convenient:</p>
+							<ul class="list-disc pl-5 mt-2 space-y-1 text-gray-600">
+								<li>Clients pay through our secure platform</li>
+								<li>We support multiple payment methods (credit cards, UPI, net banking)</li>
+								<li>LegalConnect retains a small service fee (clearly stated in your agreement)</li>
+								<li>Your earnings are deposited to your bank account weekly</li>
+								<li>Detailed transaction records are available in your dashboard</li>
+								<li>All payments are protected by our dispute resolution process</li>
+							</ul>
+							<p class="mt-3 text-gray-600">You maintain full control over your fee structure and can adjust it at any time.</p>
+						</div>
+					</div>
+
+					<!-- FAQ Item -->
+					<div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+						<button class="faq-question w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+							<span class="text-lg font-semibold text-blue-900">What are my obligations as a LegalConnect lawyer?</span>
+							<svg class="w-6 h-6 text-green-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+							</svg>
+						</button>
+						<div class="faq-answer px-6 pb-6 hidden">
+							<p class="text-gray-600">As a LegalConnect lawyer, you agree to:</p>
+							<ul class="list-disc pl-5 mt-2 space-y-1 text-gray-600">
+								<li>Maintain active Bar membership in good standing</li>
+								<li>Respond to client inquiries within 24 hours</li>
+								<li>Provide accurate information about your qualifications and experience</li>
+								<li>Adhere to all professional ethics rules and confidentiality requirements</li>
+								<li>Keep your calendar and availability up to date</li>
+								<li>Maintain professional conduct in all client interactions</li>
+								<li>Use our platform for all communications with LegalConnect clients</li>
+							</ul>
+							<p class="mt-3 text-gray-600">We provide tools and support to help you meet these obligations while growing your practice.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Still Have Questions Section -->
+		<section class="py-20 bg-gradient-to-r from-blue-900 to-green-600 text-white">
+			<div class="container mx-auto px-6 text-center">
+				<h2 class="text-3xl font-bold mb-6" data-aos="fade-up">Still have questions?</h2>
+				<p class="text-xl text-gray-200 max-w-2xl mx-auto mb-8" data-aos="fade-up">We're here to help. Contact our support team for any additional questions you may have.</p>
+				<a href="contactsupport.html" class="inline-block bg-white text-blue-600 px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-lg" data-aos="fade-up">
+					Contact Support
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer class="bg-gray-900 text-white mt-10 py-10" data-aos="fade-up">
+		<div class="container mx-auto px-6">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+				<div>
+					<h2 class="text-xl font-semibold">LegalConnect</h2>
+					<p class="text-gray-400 mt-2">Connecting citizens with trusted legal professionals.</p>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold">Quick Links</h3>
+					<ul class="mt-2 space-y-2">
+						<li><a href="home.html" class="hover:text-gray-400 transition">Home</a></li>
+						<li><a href="#" class="hover:text-gray-400 transition">Services</a></li>
+						<li><a href="about.html" class="hover:text-gray-400 transition">About</a></li>
+						<li><a href="contactsupport.html" class="hover:text-gray-400 transition">Contact</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold">Legal</h3>
+					<ul class="mt-2 space-y-2">
+						<li><a href="privacy.html" class="hover:text-gray-400 transition">Privacy Policy</a></li>
+						<li><a href="privacy.html" class="hover:text-gray-400 transition">Terms of Service</a></li>
+						<li><a href="FAQ.html" class="hover:text-gray-400 transition">FAQs</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold">Follow Us</h3>
+					<div class="flex justify-center md:justify-start space-x-4 mt-2">
+						<a href="https://www.facebook.com/" class="hover:text-green-400 transition">Facebook</a>
+						<a href="https://x.com/?lang=en" class="hover:text-green-400 transition">Twitter</a>
+						<a href="https://www.linkedin.com/login" class="hover:text-green-400 transition">LinkedIn</a>
+					</div>
+				</div>
+			</div>
+			<div class="text-center text-gray-500 mt-6 border-t border-gray-700 pt-4">&copy; 2025 LegalConnect. All rights reserved.</div>
+		</div>
+	</footer>
+
+	<!-- AOS & JavaScript -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script>
+		AOS.init({ duration: 1000, once: true });
+
+		// Mobile menu toggle
+		document.getElementById("menu-toggle").addEventListener("click", function () {
+			document.getElementById("mobile-menu").classList.toggle("hidden");
+		});
+
+		// FAQ accordion functionality
+		document.querySelectorAll('.faq-question').forEach(button => {
+			button.addEventListener('click', () => {
+				const answer = button.nextElementSibling;
+				const arrow = button.querySelector('svg');
+				
+				// Toggle answer visibility
+				answer.classList.toggle('hidden');
+				
+				// Rotate arrow
+				arrow.classList.toggle('rotate-180');
+				
+				// Close other open answers if needed
+				document.querySelectorAll('.faq-question').forEach(otherButton => {
+					if (otherButton !== button) {
+						otherButton.nextElementSibling.classList.add('hidden');
+						otherButton.querySelector('svg').classList.remove('rotate-180');
+					}
+				});
+			});
+		});
+	</script>
+
+</body>
+
+</html>

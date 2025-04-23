@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LegalConnect - Sign Up</title>
+	<link rel="stylesheet" href="../src/output.css">
+
+	<!-- AOS Library for Scroll Animations -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+</head>
+
+<body class="bg-gray-100">
+
+	<!-- Header -->
+	<header
+		class="bg-blue-900 bg-opacity-90 text-white shadow-md backdrop-blur-md fixed w-full z-50 transition duration-500">
+		<div class="container mx-auto flex justify-between items-center p-4">
+			<!-- Logo -->
+			<div class="flex items-center space-x-4">
+				<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+					<span class="text-blue-600 text-lg font-bold">LC</span>
+				</div>
+				<p class="text-2xl font-bold tracking-wide">
+					<span class="text-white">Legal</span><span class="text-green-400">Connect</span>
+				</p>
+			</div>
+
+			<!-- Navigation -->
+			<nav class="hidden md:flex space-x-8 text-lg font-medium">
+				<a href="landing.html" class="hover:text-green-400 transition">Home</a>
+				<a href="#" class="hover:text-green-400 transition">Services</a>
+				<a href="about.html" class="hover:text-green-400 transition">About</a>
+				<a href="contactsupport.html" class="hover:text-green-400 transition">Contact</a>
+			</nav>
+
+			<!-- Action Buttons -->
+			<div class="hidden md:flex space-x-4">
+				<a href="signup.html"
+					class="bg-white text-blue-600 px-5 py-2 rounded-lg font-semibold shadow-md hover:bg-gray-200 transition">Sign
+					Up</a>
+				<a href="login.html"
+					class="bg-gray-200 text-blue-600 px-5 py-2 rounded-lg font-semibold shadow-md hover:bg-gray-300 transition">Login</a>
+			</div>
+
+			<!-- Mobile Menu Button -->
+			<button class="md:hidden text-white focus:outline-none" id="menu-toggle">&#9776;</button>
+		</div>
+	</header>
+
+	<!-- Mobile Menu -->
+	<div class="hidden md:hidden bg-blue-900 text-white p-4 mt-16" id="mobile-menu">
+		<a href="landing.html" class="block py-2">Home</a>
+		<a href="#" class="block py-2">Services</a>
+		<a href="about.html" class="block py-2">About</a>
+		<a href="contactsupport.html" class="block py-2">Contact</a>
+		<a href="signup.html" class="block py-2 bg-white text-blue-600 text-center rounded-lg">Sign Up</a>
+		<a href="login.html" class="block py-2 bg-gray-200 text-blue-600 text-center rounded-lg">Login</a>
+	</div>
+
+	<main class="pt-24 pb-16">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up">
+				<div class="md:flex">
+					<!-- Left Panel - Image + Information -->
+					<div class="md:w-1/2 bg-gradient-to-r from-blue-900 to-green-600 p-8 text-white">
+						<h2 class="text-3xl font-bold mb-6">Join LegalConnect</h2>
+						<p class="mb-6">Create an account to connect with legal professionals or offer your services on our platform.</p>
+						<div class="mb-8">
+							<h3 class="text-xl font-semibold mb-2">Why Sign Up?</h3>
+							<ul class="space-y-2">
+								<li class="flex items-center">
+									<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+										<path fill-rule="evenodd"
+											d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+											clip-rule="evenodd"></path>
+									</svg>
+									Access trusted legal experts
+								</li>
+								<li class="flex items-center">
+									<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+										<path fill-rule="evenodd"
+											d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+											clip-rule="evenodd"></path>
+									</svg>
+									Secure document management
+								</li>
+								<li class="flex items-center">
+									<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+										<path fill-rule="evenodd"
+											d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+											clip-rule="evenodd"></path>
+									</svg>
+									Streamlined legal processes
+								</li>
+							</ul>
+						</div>
+						<p class="text-sm">Already have an account? <a href="login.html" class="text-green-300 font-semibold hover:underline">Login here</a></p>
+					</div>
+
+					<!-- Right Panel - Sign Up Form -->
+					<div class="md:w-1/2 p-8">
+						<!-- Toggle between User and Service Provider -->
+						<div class="flex border-b border-gray-200 mb-6">
+							<button id="user-tab" class="w-1/2 py-2 text-center font-medium text-blue-600 border-b-2 border-blue-600">User</button>
+							<button id="provider-tab" class="w-1/2 py-2 text-center font-medium text-gray-500">Service Provider</button>
+						</div>
+
+						<!-- Signup error/success messages -->
+						<div id="signup-error" class="text-red-600 text-sm mb-4 hidden"></div>
+						<div id="signup-success" class="text-green-600 text-sm mb-4 hidden"></div>
+
+						<!-- User Sign Up Form -->
+						<form id="user-form" class="space-y-4">
+							<h3 class="text-xl font-bold text-blue-900 mb-2">User Registration</h3>
+							
+							<div class="grid grid-cols-2 gap-4">
+								<div>
+									<label for="firstName" class="block text-gray-700 mb-1">First Name</label>
+									<input type="text" id="firstName" name="firstName" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+								</div>
+								<div>
+									<label for="lastName" class="block text-gray-700 mb-1">Last Name</label>
+									<input type="text" id="lastName" name="lastName" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+								</div>
+							</div>
+
+							<div>
+								<label for="email" class="block text-gray-700 mb-1">Email Address</label>
+								<input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+							</div>
+
+							<div>
+								<label for="phone" class="block text-gray-700 mb-1">Phone Number</label>
+								<input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+							</div>
+
+							<div>
+								<label for="password" class="block text-gray-700 mb-1">Password</label>
+								<input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+							</div>
+
+							<div>
+								<label for="confirmPassword" class="block text-gray-700 mb-1">Confirm Password</label>
+								<input type="password" id="confirmPassword" name="confirmPassword" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+							</div>
+
+							<div class="flex items-center">
+								<input type="checkbox" id="terms" name="terms" class="h-4 w-4 text-blue-600 focus:ring-blue-600 border-gray-300 rounded">
+								<label for="terms" class="ml-2 block text-sm text-gray-700">
+									I agree to the <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> and <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>
+								</label>
+							</div>
+
+							<button type="submit" class="w-full bg-gradient-to-r from-blue-700 to-green-600 text-white font-medium py-3 rounded-lg hover:shadow-lg transition duration-300">Create Account</button>
+						</form>
+
+						<!-- Service Provider Sign Up Form -->
+						<form id="provider-form" class="hidden space-y-4">
+							<h3 class="text-xl font-bold text-blue-900 mb-2">Legal Service Provider Registration</h3>
+							
+							<div>
+								<label for="fullName" class="block text-gray-700 mb-1">Full Name</label>
+								<input type="text" id="fullName" name="fullName" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+							</div>
+
+							<div>
+								<label for="providerType" class="block text-gray-700 mb-1">Provider Type</label>
+								<select id="providerType" name="providerType" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+									<option value="">Select type of legal service</option>
+									<option value="Corporate Lawyer">Corporate Lawyer</option>
+									<option value="Intellectual Property Lawyer">Intellectual Property Lawyer</option>
+									<option value="Criminal Defense Lawyer">Criminal Defense Lawyer</option>
+									<option value="Family Law Specialist">Family Law Specialist</option>
+									<option value="Real Estate Lawyer">Real Estate Lawyer</option>
+									<option value="Labor & Employment Lawyer">Labor & Employment Lawyer</option>
+									<option value="Tax Attorney">Tax Attorney</option>
+									<option value="Civil Rights Lawyer">Civil Rights Lawyer</option>
+									<option value="Environmental Lawyer">Environmental Lawyer</option>
+									<option value="Immigration Lawyer">Immigration Lawyer</option>
+									<option value="Bankruptcy Lawyer">Bankruptcy Lawyer</option>
+									<option value="Personal Injury Lawyer">Personal Injury Lawyer</option>
+									<option value="Constitutional Lawyer">Constitutional Lawyer</option>
+									<option value="Entertainment Lawyer">Entertainment Lawyer</option>
+									<option value="Healthcare Lawyer">Healthcare Lawyer</option>
+									<option value="Other Legal Professional">Other Legal Professional</option>
+								</select>
+							</div>
+
+							<div>
+								<label for="licenseNumber" class="block text-gray-700 mb-1">License Number</label>
+								<input type="text" id="licenseNumber" name="licenseNumber" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+							</div>
+
+							<div>
+								<label for="bio" class="block text-gray-700 mb-1">Professional Bio</label>
+								<textarea id="bio" name="bio" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="Briefly describe your professional background and expertise"></textarea>
+							</div>
+
+							<div>
+								<label for="servicesOffered" class="block text-gray-700 mb-1">Services Offered</label>
+								<textarea id="servicesOffered" name="servicesOffered" rows="2" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="List your primary services, specialties, or areas of expertise"></textarea>
+							</div>
+
+							<div>
+								<label for="providerEmail" class="block text-gray-700 mb-1">Email Address</label>
+								<input type="email" id="providerEmail" name="providerEmail" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+							</div>
+
+							<div>
+								<label for="providerPhone" class="block text-gray-700 mb-1">Phone Number</label>
+								<input type="tel" id="providerPhone" name="providerPhone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+							</div>
+
+							<div>
+								<label for="providerPassword" class="block text-gray-700 mb-1">Password</label>
+								<input type="password" id="providerPassword" name="providerPassword" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+							</div>
+
+							<div>
+								<label for="providerConfirmPassword" class="block text-gray-700 mb-1">Confirm Password</label>
+								<input type="password" id="providerConfirmPassword" name="providerConfirmPassword" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+							</div>
+
+							<div class="flex items-center">
+								<input type="checkbox" id="providerTerms" name="providerTerms" class="h-4 w-4 text-blue-600 focus:ring-blue-600 border-gray-300 rounded">
+								<label for="providerTerms" class="ml-2 block text-sm text-gray-700">
+									I agree to the <a href="#" class="text-blue-600 hover:underline">Terms of Service</a>, <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>, and <a href="#" class="text-blue-600 hover:underline">Professional Guidelines</a>
+								</label>
+							</div>
+
+							<button type="submit" class="w-full bg-gradient-to-r from-blue-700 to-green-600 text-white font-medium py-3 rounded-lg hover:shadow-lg transition duration-300">Register as Service Provider</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Footer -->
+	<footer class="bg-gray-900 text-white py-10" data-aos="fade-up">
+		<div class="container mx-auto px-6">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+				<div>
+					<h2 class="text-xl font-semibold">LegalConnect</h2>
+					<p class="text-gray-400 mt-2">Connecting citizens with trusted legal professionals.</p>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold">Quick Links</h3>
+					<ul class="mt-2 space-y-2">
+						<li><a href="landing.html" class="hover:text-gray-400 transition">Home</a></li>
+						<li><a href="#" class="hover:text-gray-400 transition">Services</a></li>
+						<li><a href="about.html" class="hover:text-gray-400 transition">About</a></li>
+						<li><a href="contactsupport.html" class="hover:text-gray-400 transition">Contact</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold">Legal</h3>
+					<ul class="mt-2 space-y-2">
+						<li><a href="privacy.html" class="hover:text-gray-400 transition">Privacy Policy</a></li>
+						<li><a href="privacy.html" class="hover:text-gray-400 transition">Terms of Service</a></li>
+						<li><a href="contactsupport.html" class="hover:text-gray-400 transition">Support</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold">Follow Us</h3>
+					<div class="flex justify-center md:justify-start space-x-4 mt-2">
+						<a href="https://www.facebook.com/" class="hover:text-green-400 transition">Facebook</a>
+						<a href="https://x.com/?lang=en" class="hover:text-green-400 transition">Twitter</a>
+						<a href="https://www.linkedin.com/login" class="hover:text-green-400 transition">LinkedIn</a>
+					</div>
+				</div>
+			</div>
+			<div class="text-center text-gray-500 mt-6 border-t border-gray-700 pt-4">&copy; 2025 LegalConnect. All rights reserved.</div>
+		</div>
+	</footer>
+	
+
+	<!-- AOS & JavaScript -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script>
+		AOS.init({ duration: 1000, once: true });
+
+		document.getElementById("menu-toggle").addEventListener("click", function () {
+			document.getElementById("mobile-menu").classList.toggle("hidden");
+		});
+
+		// Tab switching
+		const userTab = document.getElementById("user-tab");
+		const providerTab = document.getElementById("provider-tab");
+		const userForm = document.getElementById("user-form");
+		const providerForm = document.getElementById("provider-form");
+
+		userTab.addEventListener("click", function() {
+			userTab.classList.add("text-blue-600", "border-b-2", "border-blue-600");
+			userTab.classList.remove("text-gray-500");
+			providerTab.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+			providerTab.classList.add("text-gray-500");
+			userForm.classList.remove("hidden");
+			providerForm.classList.add("hidden");
+			
+			// Clear error/success messages
+			document.getElementById("signup-error").classList.add("hidden");
+			document.getElementById("signup-success").classList.add("hidden");
+		});
+
+		providerTab.addEventListener("click", function() {
+			providerTab.classList.add("text-blue-600", "border-b-2", "border-blue-600");
+			providerTab.classList.remove("text-gray-500");
+			userTab.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+			userTab.classList.add("text-gray-500");
+			providerForm.classList.remove("hidden");
+			userForm.classList.add("hidden");
+			
+			// Clear error/success messages
+			document.getElementById("signup-error").classList.add("hidden");
+			document.getElementById("signup-success").classList.add("hidden");
+		});
+
+		// User signup form submission
+		document.getElementById("user-form").addEventListener("submit", function(e) {
+			e.preventDefault();
+			
+			const errorElement = document.getElementById("signup-error");
+			const successElement = document.getElementById("signup-success");
+			
+			// Hide any previous messages
+			errorElement.classList.add("hidden");
+			successElement.classList.add("hidden");
+			
+			// Get form data
+			const firstName = document.getElementById("firstName").value;
+			const lastName = document.getElementById("lastName").value;
+			const email = document.getElementById("email").value;
+			const phone = document.getElementById("phone").value;
+			const password = document.getElementById("password").value;
+			const confirmPassword = document.getElementById("confirmPassword").value;
+			const terms = document.getElementById("terms").checked;
+			
+			// Validate form
+			if (!terms) {
+				errorElement.textContent = "You must agree to the Terms of Service and Privacy Policy.";
+				errorElement.classList.remove("hidden");
+				return;
+			}
+			
+			// Create request data
+			const data = {
+				user_type: 'user',
+				first_name: firstName,
+				last_name: lastName,
+				email: email,
+				phone: phone,
+				password: password,
+				confirm_password: confirmPassword
+			};
+			
+			// Send signup request
+			fetch('../backend/api/register.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
+			.then(response => response.json())
+			.then(data => {
+				if (data.success) {
+					// Show success message
+					successElement.textContent = data.message || 'Registration successful! Redirecting to login page...';
+					successElement.classList.remove("hidden");
+					
+					// Clear form
+					document.getElementById("user-form").reset();
+					
+					// Redirect to login page after 2 seconds
+					setTimeout(function() {
+						window.location.href = 'login.html';
+					}, 2000);
+				} else {
+					// Show error message
+					errorElement.textContent = data.error || 'Registration failed. Please try again.';
+					errorElement.classList.remove("hidden");
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				errorElement.textContent = 'An error occurred. Please try again later.';
+				errorElement.classList.remove("hidden");
+			});
+		});
+
+		// Provider signup form submission
+		document.getElementById("provider-form").addEventListener("submit", function(e) {
+			e.preventDefault();
+			
+			const errorElement = document.getElementById("signup-error");
+			const successElement = document.getElementById("signup-success");
+			
+			// Hide any previous messages
+			errorElement.classList.add("hidden");
+			successElement.classList.add("hidden");
+			
+			// Get form data
+			const fullName = document.getElementById("fullName").value;
+			const providerType = document.getElementById("providerType").value;
+			const licenseNumber = document.getElementById("licenseNumber").value;
+			const bio = document.getElementById("bio").value;
+			const servicesOffered = document.getElementById("servicesOffered").value;
+			const email = document.getElementById("providerEmail").value;
+			const phone = document.getElementById("providerPhone").value;
+			const password = document.getElementById("providerPassword").value;
+			const confirmPassword = document.getElementById("providerConfirmPassword").value;
+			const terms = document.getElementById("providerTerms").checked;
+			
+			// Validate form
+			if (!terms) {
+				errorElement.textContent = "You must agree to the Terms of Service, Privacy Policy, and Professional Guidelines.";
+				errorElement.classList.remove("hidden");
+				return;
+			}
+			
+			// Create request data
+			const data = {
+				user_type: 'provider',
+				fullname: fullName,
+				provider_type: providerType,
+				license_number: licenseNumber,
+				bio: bio,
+				services_offered: servicesOffered,
+				email: email,
+				provider_phone: phone,
+				password: password,
+				confirm_password: confirmPassword
+			};
+			
+			// Send signup request
+			fetch('../backend/api/register.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
+			.then(response => response.json())
+			.then(data => {
+				if (data.success) {
+					// Show success message
+					successElement.textContent = data.message || 'Registration successful! Redirecting to login page...';
+					successElement.classList.remove("hidden");
+					
+					// Clear form
+					document.getElementById("provider-form").reset();
+					
+					// Redirect to login page after 2 seconds
+					setTimeout(function() {
+						window.location.href = 'login.html';
+					}, 2000);
+				} else {
+					// Show error message
+					errorElement.textContent = data.error || 'Registration failed. Please try again.';
+					errorElement.classList.remove("hidden");
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				errorElement.textContent = 'An error occurred. Please try again later.';
+				errorElement.classList.remove("hidden");
+			});
+		});
+
+		// Clear any existing session data when loading signup page
+		window.addEventListener('load', function() {
+			// Remove session ID from localStorage
+			localStorage.removeItem('session_id');
+			sessionStorage.removeItem('session_id');
+			
+			// Clear any cookies
+			document.cookie.split(";").forEach(function(c) {
+				document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+			});
+		});
+
+		// Check if user is already logged in
+		window.addEventListener('DOMContentLoaded', function() {
+			// Get session ID from localStorage
+			const sessionId = localStorage.getItem('session_id');
+			
+			if (sessionId) {
+				// Verify session ID
+				fetch('../backend/api/check-auth.php?token=' + sessionId, {
+					method: 'GET',
+					credentials: 'include'
+				})
+				.then(response => response.json())
+				.then(data => {
+					if (data.authenticated) {
+						// Redirect based on user type
+						if (data.user.user_type === 'provider') {
+							window.location.href = 'provider-dashboard.html';
+						} else {
+							window.location.href = 'home.html';
+						}
+					}
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+			}
+		});
+	</script>
+
+</body>
+
+</html>

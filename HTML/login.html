@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LegalConnect - Login</title>
+	<link rel="stylesheet" href="../src/output.css">
+
+	<!-- AOS Library for Scroll Animations -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+</head>
+
+<body class="bg-gray-100">
+
+	<!-- Header -->
+	<header
+		class="bg-blue-900 bg-opacity-90 text-white shadow-md backdrop-blur-md fixed w-full z-50 transition duration-500">
+		<div class="container mx-auto flex justify-between items-center p-4">
+			<!-- Logo -->
+			<div class="flex items-center space-x-4">
+				<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+					<span class="text-blue-600 text-lg font-bold">LC</span>
+				</div>
+				<p class="text-2xl font-bold tracking-wide">
+					<span class="text-white">Legal</span><span class="text-green-400">Connect</span>
+				</p>
+			</div>
+
+			<!-- Navigation -->
+			<nav class="hidden md:flex space-x-8 text-lg font-medium">
+				<a href="landing.html" class="hover:text-green-400 transition">Home</a>
+				<a href="#" class="hover:text-green-400 transition">Services</a>
+				<a href="about.html" class="hover:text-green-400 transition">About</a>
+				<a href="contactsupport.html" class="hover:text-green-400 transition">Contact</a>
+			</nav>
+
+			<!-- Action Buttons -->
+			<div class="hidden md:flex space-x-4">
+				<a href="signup.html"
+					class="bg-white text-blue-600 px-5 py-2 rounded-lg font-semibold shadow-md hover:bg-gray-200 transition">Sign
+					Up</a>
+				<a href="login.html"
+					class="bg-gray-200 text-blue-600 px-5 py-2 rounded-lg font-semibold shadow-md hover:bg-gray-300 transition">Login</a>
+			</div>
+
+			<!-- Mobile Menu Button -->
+			<button class="md:hidden text-white focus:outline-none" id="menu-toggle">&#9776;</button>
+		</div>
+	</header>
+
+	<!-- Mobile Menu -->
+	<div class="hidden md:hidden bg-blue-900 text-white p-4 mt-16" id="mobile-menu">
+		<a href="landing.html" class="block py-2">Home</a>
+		<a href="#" class="block py-2">Services</a>
+		<a href="about.html" class="block py-2">About</a>
+		<a href="contactsupport.html" class="block py-2">Contact</a>
+		<a href="signup.html" class="block py-2 bg-white text-blue-600 text-center rounded-lg">Sign Up</a>
+		<a href="login.html" class="block py-2 bg-gray-200 text-blue-600 text-center rounded-lg">Login</a>
+	</div>
+
+	<main class="pt-20">
+		<!-- Login Section -->
+		<section class="py-16 bg-gradient-to-r from-blue-900 to-green-600 min-h-screen">
+			<div class="container mx-auto px-6">
+				<div class="max-w-md mx-auto bg-white rounded-xl shadow-2xl overflow-hidden" data-aos="fade-up">
+					<div class="p-8">
+						<div class="text-center mb-8">
+							<h2 class="text-3xl font-bold text-blue-900">Welcome Back</h2>
+							<p class="text-gray-600 mt-2">Login to access your LegalConnect account</p>
+						</div>
+
+						<!-- Login Type Tabs -->
+						<div class="flex mb-6 bg-gray-100 rounded-lg p-1">
+							<button id="user-tab" 
+								class="w-1/2 py-2 text-center rounded-lg bg-green-600 text-white font-medium transition">User</button>
+							<button id="provider-tab"
+								class="w-1/2 py-2 text-center rounded-lg text-gray-700 font-medium transition">Legal Provider</button>
+						</div>
+
+						<!-- Login Form -->
+						<form id="login-form">
+							<div class="space-y-4">
+								<div>
+									<label for="email" class="block text-gray-700 font-medium mb-1">Email Address</label>
+									<input type="email" id="email" name="email"
+										class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+										placeholder="Your email" required>
+								</div>
+								<div>
+									<label for="password" class="block text-gray-700 font-medium mb-1">Password</label>
+									<input type="password" id="password" name="password"
+										class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+										placeholder="Your password" required>
+								</div>
+								<div class="flex items-center justify-between">
+									<div class="flex items-center">
+										<input type="checkbox" id="remember" name="remember" class="h-4 w-4 text-green-600">
+										<label for="remember" class="ml-2 text-gray-700">Remember me</label>
+									</div>
+									<a href="#" class="text-green-600 hover:text-green-800 text-sm">Forgot password?</a>
+								</div>
+								<div id="login-error" class="text-red-600 text-sm hidden"></div>
+								<button type="submit"
+									class="w-full bg-blue-900 text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition duration-300">Login</button>
+							</div>
+						</form>
+
+						<div class="mt-6 text-center">
+							<p class="text-gray-600">Don't have an account? <a href="signup.html"
+									class="text-green-600 font-medium hover:text-green-800">Sign up</a></p>
+						</div>
+
+						<div class="relative flex items-center justify-center mt-6">
+							<div class="border-t border-gray-300 absolute w-full"></div>
+							<div class="bg-white px-4 relative z-10 text-gray-500">or continue with</div>
+						</div>
+
+						<div class="grid grid-cols-3 gap-4 mt-6">
+							<button
+								class="flex items-center justify-center py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+								Google
+							</button>
+							<button
+								class="flex items-center justify-center py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+								Facebook
+							</button>
+							<button
+								class="flex items-center justify-center py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+								LinkedIn
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer class="bg-gray-900 text-white py-10" data-aos="fade-up">
+		<div class="container mx-auto px-6">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+				<div>
+					<h2 class="text-xl font-semibold">LegalConnect</h2>
+					<p class="text-gray-400 mt-2">Connecting citizens with trusted legal professionals.</p>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold">Quick Links</h3>
+					<ul class="mt-2 space-y-2">
+						<li><a href="landing.html" class="hover:text-gray-400 transition">Home</a></li>
+						<li><a href="#" class="hover:text-gray-400 transition">Services</a></li>
+						<li><a href="about.html" class="hover:text-gray-400 transition">About</a></li>
+						<li><a href="contactsupport.html" class="hover:text-gray-400 transition">Contact</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold">Legal</h3>
+					<ul class="mt-2 space-y-2">
+						<li><a href="privacy.html" class="hover:text-gray-400 transition">Privacy Policy</a></li>
+						<li><a href="privacy.html" class="hover:text-gray-400 transition">Terms of Service</a></li>
+						<li><a href="contactsupport.html" class="hover:text-gray-400 transition">Support</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-semibold">Follow Us</h3>
+					<div class="flex justify-center md:justify-start space-x-4 mt-2">
+						<a href="https://www.facebook.com/" class="hover:text-green-400 transition">Facebook</a>
+							<a href="https://x.com/?lang=en" class="hover:text-green-400 transition">Twitter</a>
+							<a href="https://www.linkedin.com/login" class="hover:text-green-400 transition">LinkedIn</a>
+					</div>
+				</div>
+			</div>
+			<div class="text-center text-gray-500 mt-6 border-t border-gray-700 pt-4">&copy; 2025 LegalConnect. All rights reserved.</div>
+		</div>
+	</footer>
+
+	<!-- AOS & JavaScript -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script>
+		AOS.init({ duration: 1000, once: true });
+
+		document.getElementById("menu-toggle").addEventListener("click", function () {
+			document.getElementById("mobile-menu").classList.toggle("hidden");
+		});
+
+		// Tab switching logic
+		const userTab = document.getElementById("user-tab");
+		const providerTab = document.getElementById("provider-tab");
+		let currentUserType = 'user'; // Default user type
+
+		userTab.addEventListener("click", function() {
+			userTab.classList.add("bg-green-600", "text-white");
+			userTab.classList.remove("text-gray-700");
+			providerTab.classList.remove("bg-green-600", "text-white");
+			providerTab.classList.add("text-gray-700");
+			currentUserType = 'user';
+		});
+
+		providerTab.addEventListener("click", function() {
+			providerTab.classList.add("bg-green-600", "text-white");
+			providerTab.classList.remove("text-gray-700");
+			userTab.classList.remove("bg-green-600", "text-white");
+			userTab.classList.add("text-gray-700");
+			currentUserType = 'provider';
+		});
+
+		// Login form submission
+		document.getElementById("login-form").addEventListener("submit", function(e) {
+			e.preventDefault();
+			
+			const email = document.getElementById("email").value;
+			const password = document.getElementById("password").value;
+			const errorElement = document.getElementById("login-error");
+			
+			console.log("===DETAILED LOGIN DEBUG===");
+			console.log("Login attempt for:", email, "User type:", currentUserType);
+			
+			// Hide any previous error
+			errorElement.classList.add("hidden");
+			
+			// Create request data
+			const data = {
+				email: email,
+				password: password,
+				user_type: currentUserType
+			};
+			
+			console.log("Sending login request with data:", JSON.stringify(data));
+			
+			// Send login request
+			fetch('../backend/api/login.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data),
+				credentials: 'include' // Include cookies
+			})
+			.then(response => {
+				console.log("Login response status:", response.status);
+				return response.json();
+			})
+			.then(data => {
+				console.log("LOGIN RESPONSE DATA:", JSON.stringify(data));
+				
+				if (data.success) {
+					console.log("Login successful, session ID:", data.session_id ? 'Session ID received' : 'No session ID received');
+					console.log("User data received:", JSON.stringify(data.user));
+					
+					// Store session ID in localStorage
+					if (document.getElementById("remember").checked) {
+						localStorage.setItem('session_id', data.session_id);
+						console.log("Session ID stored in localStorage (Remember me checked)");
+					} else {
+						sessionStorage.setItem('session_id', data.session_id);
+						console.log("Session ID stored in sessionStorage (Remember me not checked)");
+					}
+					
+					// Store user data for debugging
+					localStorage.setItem('debug_user_data', JSON.stringify(data.user));
+					
+					// Store user type in localStorage
+					localStorage.setItem('userType', data.user.user_type);
+					console.log("User type stored in localStorage:", data.user.user_type);
+					
+					// Redirect based on user type
+					console.log("Redirecting to:", data.user.user_type === 'provider' ? 'provider-dashboard.html' : 'home.html');
+					
+					// Slight delay to ensure storage is complete
+					setTimeout(function() {
+						if (data.user.user_type === 'provider') {
+							window.location.href = 'provider-dashboard.html';
+						} else {
+							window.location.href = 'home.html';
+						}
+					}, 100);
+				} else {
+					// Show error message
+					console.error("Login failed:", data.error);
+					errorElement.textContent = data.error || 'Login failed. Please try again.';
+					errorElement.classList.remove("hidden");
+				}
+			})
+			.catch(error => {
+				console.error('Login Error Details:', error);
+				errorElement.textContent = 'An error occurred. Please try again later.';
+				errorElement.classList.remove("hidden");
+			});
+		});
+
+		// Clear all storage data to start fresh
+		(function clearAllStorage() {
+			console.log("EMERGENCY CLEANUP: Completely purging all storage and any 'John Lawyer' references");
+			
+			// Check for any John Lawyer data before clearing
+			try {
+				const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+				if (userData && userData.name && userData.name.includes('John Lawyer')) {
+					console.warn("Found John Lawyer in userData, ensuring complete removal");
+				}
+				
+				if (sessionStorage.getItem('selectedProviderName') === 'John Lawyer') {
+					console.warn("Found John Lawyer in sessionStorage, ensuring complete removal");
+				}
+			} catch (e) {
+				console.error("Error checking for test data:", e);
+			}
+			
+			// Clear everything
+			localStorage.clear();
+			sessionStorage.clear();
+			
+			// Remove all cookies
+			document.cookie.split(";").forEach(function(c) {
+				document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+			});
+			
+			console.log("All storage cleared and ready for fresh login");
+		})();
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			const loginForm = document.getElementById('login-form');
+			console.log("Login page loaded, clearing any existing session data");
+			// Remove session ID from localStorage
+			localStorage.removeItem('session_id');
+			sessionStorage.removeItem('session_id');
+			console.log("Session storage cleared");
+			
+			// Clear any cookies
+			document.cookie.split(";").forEach(function(c) {
+				document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+			});
+			console.log("Cookies cleared");
+		});
+
+		// Check if user is already logged in
+		window.addEventListener('DOMContentLoaded', function() {
+			console.log("🔐 USER AUTHENTICATION STATUS:");
+			console.log("localStorage session_id:", localStorage.getItem('session_id') ? "EXISTS" : "NOT FOUND");
+			console.log("sessionStorage session_id:", sessionStorage.getItem('session_id') ? "EXISTS" : "NOT FOUND");
+			console.log("-------------------------------");
+			
+			try {
+				// Check both localStorage and sessionStorage for session ID
+				let sessionId = localStorage.getItem('session_id');
+				if (!sessionId) {
+					sessionId = sessionStorage.getItem('session_id');
+				}
+				
+				if (sessionId) {
+					// Verify session ID
+					fetch('../backend/api/check-auth.php?token=' + sessionId, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						credentials: 'include'
+					})
+					.then(response => {
+						console.log("Session check response status:", response.status);
+						// Check if the response is ok (status 200-299)
+						if (!response.ok) {
+							console.error("Session check response not ok:", response.status);
+							// If the server is unreachable or returns an error, assume not authenticated
+							return { authenticated: false };
+						}
+						
+						return response.text().then(text => {
+							// Try to parse as JSON, but handle empty responses
+							if (!text) {
+								console.warn("Empty response received from server");
+								return { authenticated: false };
+							}
+							try {
+								return JSON.parse(text);
+							} catch (e) {
+								console.error("Error parsing JSON response:", e);
+								console.log("Raw response:", text);
+								return { authenticated: false };
+							}
+						});
+					})
+					.then(data => {
+						console.log("Session check response data:", data);
+						
+						if (data.authenticated) {
+							console.log("User already authenticated, redirecting");
+							// Store user type in localStorage
+							localStorage.setItem('userType', data.user.user_type);
+							console.log("User type stored in localStorage:", data.user.user_type);
+							
+							// Redirect based on user type
+							if (data.user.user_type === 'provider') {
+								window.location.href = 'provider-dashboard.html';
+							} else {
+								window.location.href = 'home.html';
+							}
+						} else {
+							console.log("Session ID invalid or expired");
+						}
+					})
+					.catch(error => {
+						console.error('Session Check Error Details:', error);
+					});
+				}
+			} catch (error) {
+				console.error("Error checking existing session:", error);
+			}
+		});
+	</script>
+
+</body>
+
+</html>
